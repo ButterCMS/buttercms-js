@@ -1,0 +1,25 @@
+{
+  "name": "buttercms",
+  "version": "1.0.0",
+  "description": "ButterCMS API Client",
+  "keywords": [
+    "buttercms",
+    "butter",
+    "cms",
+    "api"
+  ],
+  "engines": {
+    "node": ">=0.10.32"
+  },
+  "homepage": "https://github.com/buttercms/buttercms-node",
+  "author": "ButterCMS <support@buttercms.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/buttercms/buttercms-node.git"
+  },
+  "main": "lib/butter.js",
+  "dependencies": {
+    "axios": "0.9.1"
+  },
+  "license": "MIT"
+}
