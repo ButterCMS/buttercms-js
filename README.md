@@ -13,7 +13,7 @@ npm install buttercms
 Every resource is accessed via your butter instance:
 
 ```js
-var butter = require('buttercms')(' your stripe API key ');
+var butter = require('buttercms')(' your butter API token ');
 ```
 
 Every resource method returns a promise:
