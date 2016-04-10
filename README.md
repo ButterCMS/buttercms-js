@@ -35,7 +35,7 @@ butter.post.retrieve("hello-world")
   });
 ```
 
-For an example use case see the [example Express.js app](https://github.com/buttercms/express-example).
+See our [node app](https://github.com/buttercms/node-example) for a full example.
 
 ## Available resources & methods
 
