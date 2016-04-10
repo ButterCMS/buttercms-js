@@ -1,6 +1,6 @@
 # ButterCMS node.js client
 
-[![npm version](https://img.shields.io/npm/v/buttercms.svg?style=flat-square)](https://www.npmjs.org/package/buttercms)
+[![npm version](https://img.shields.io/npm/v/buttercms.svg)](https://www.npmjs.org/package/buttercms)
 
 ## Installation
 
