@@ -4,6 +4,8 @@
 
 ## Installation
 
+Requires node.js version 4 or greater.
+
 ```
 npm install buttercms
 ```
