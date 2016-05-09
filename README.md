@@ -46,6 +46,7 @@ Where you see params it is a plain js object, e.g. `{page: 1}`
 * post
   * `retrieve(slug[, params])`
   * `list([params])`
+  * `search(query[, params])`
 * category
   * `retrieve(slug[, params])`
   * `list([params])`
