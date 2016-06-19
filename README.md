@@ -35,6 +35,14 @@ butter.post.retrieve("hello-world")
   }).catch(function(response) {
     console.log(response)
   });
+
+// Try our new custom content feature
+butter.content.retrieve(["homepage_html_title", "homepage_meta_description"])
+  .then(function(response) {
+    console.log(response)
+  }).catch(function(response) {
+    console.log(response)
+  });
 ```
 
 See our [node app](https://github.com/buttercms/node-example) for a full example.
@@ -55,6 +63,8 @@ Where you see params it is a plain js object, e.g. `{page: 1}`
   * `list([params])`
 * feed
   * `retrieve(type[, params])`
+* content
+  * `retrieve(keys)`
 
 ## Documentation
 
