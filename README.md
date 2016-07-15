@@ -2,6 +2,10 @@
 
 [![npm version](https://img.shields.io/npm/v/buttercms.svg)](https://www.npmjs.org/package/buttercms)
 
+## Documentation
+
+For a comprehensive list of examples, check out the [API documentation](https://buttercms.com/docs/api/).
+
 ## Installation
 
 Requires node.js version 4 or greater.
