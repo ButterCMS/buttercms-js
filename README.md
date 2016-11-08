@@ -62,6 +62,9 @@ Where you see params it is a plain js object, e.g. `{page: 1}`
 * category
   * `retrieve(slug[, params])`
   * `list([params])`
+* tag
+  * `retrieve(slug[, params])`
+  * `list([params])`
 * author
   * `retrieve(slug[, params])`
   * `list([params])`
