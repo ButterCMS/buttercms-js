@@ -73,6 +73,20 @@ Where you see params it is a plain js object, e.g. `{page: 1}`
 * content
   * `retrieve(keys)`
 
+## Test mode
+
+Test mode can be used to setup a staging website for previewing content or for testing content during local development. To fetch content from test mode add an additional argument, `true`, to the package initialization:
+
+```js
+var butter = require('buttercms')('your butter API token', true);
+```
+
+Or use an environment variable:
+
+```js
+var butter = require('buttercms')('your butter API token', process.env.BUTTER_TEST_MODE);
+```
+
 ## Documentation
 
 Documentation is available at https://buttercms.com/docs/api/node
