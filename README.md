@@ -25,28 +25,25 @@ var butter = require('buttercms')(' your butter API token ');
 Every resource method returns a promise:
 
 ```js
-butter.post.list({page: 1, page_size: 10})
-  .then(function(response) {
-    console.log(response)
-  }).catch(function(response) {
-    console.log(response)
-  });
+// Get blog posts
+butter.post.list({page: 1, page_size: 10}).then(function(response) {
+  console.log(response)
+})
 
+// Get blog post
+butter.post.retrieve("hello-world").then(function(response) {
+  console.log(response)
+})
 
-butter.post.retrieve("hello-world")
-  .then(function(response) {
-    console.log(response)
-  }).catch(function(response) {
-    console.log(response)
-  });
+// Get homepage content
+butter.content.retrieve(["home"]).then(function(resp) {
+  console.log(resp)
+});
 
-// Try our new custom content feature
-butter.content.retrieve(["homepage_html_title", "homepage_meta_description"])
-  .then(function(response) {
-    console.log(response)
-  }).catch(function(response) {
-    console.log(response)
-  });
+// Get pages
+butter.content.retrieve(["pages"]).then(function(resp) {
+  console.log(resp)
+});
 ```
 
 See our [node app](https://github.com/buttercms/node-example) for a full example.
