@@ -46,7 +46,7 @@ butter.content.retrieve(["pages"]).then(function(resp) {
 });
 ```
 
-See our [node app](https://github.com/buttercms/node-example) for a full example.
+See our [node app](https://github.com/buttercms/nodejs-cms-express-blog) for a full example.
 
 ## Available resources & methods
 
