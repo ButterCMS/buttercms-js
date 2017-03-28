@@ -70,6 +70,18 @@ Where you see params it is a plain js object, e.g. `{page: 1}`
 * content
   * `retrieve(keys)`
 
+## Localization
+
+Setup locales in the ButterCMS dashboard and fetch localized content using the locale option:
+
+
+```js
+// Get pages
+butter.content.retrieve(["pages"], {locale: 'es'}).then(function(resp) {
+  console.log(resp)
+});
+```
+
 ## Test mode
 
 Test mode can be used to setup a staging website for previewing content or for testing content during local development. To fetch content from test mode add an additional argument, `true`, to the package initialization:

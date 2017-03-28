@@ -1,6 +1,6 @@
 {
   "name": "buttercms",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "ButterCMS API Client",
   "keywords": [
     "buttercms",
@@ -19,7 +19,8 @@
   },
   "main": "lib/butter.js",
   "dependencies": {
-    "axios": "0.9.1"
+    "axios": "0.9.1",
+    "lodash": "^4.17.4"
   },
   "license": "MIT"
 }
