@@ -1,6 +1,6 @@
 {
   "name": "buttercms",
-  "version": "1.0.12",
+  "version": "1.0.14",
   "description": "ButterCMS API Client",
   "keywords": [
     "buttercms",
@@ -22,5 +22,8 @@
     "axios": "0.9.1",
     "lodash": "^4.17.4"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^2.5.0"
+  }
 }

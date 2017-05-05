@@ -1,4 +1,4 @@
-# ButterCMS node.js client
+# ButterCMS JS client
 
 [![npm version](https://img.shields.io/npm/v/buttercms.svg)](https://www.npmjs.org/package/buttercms)
 
@@ -11,7 +11,13 @@ For a comprehensive list of examples, check out the [API documentation](https://
 Requires node.js version 4 or greater.
 
 ```
-npm install buttercms
+npm install buttercms --save
+```
+
+Butter can also be included directly in HTML:
+
+```html
+<script src="https://unpkg.com/buttercms@^1.0.0/dist/butter.js"></script>
 ```
 
 ## Overview
@@ -19,7 +25,22 @@ npm install buttercms
 Every resource is accessed via your butter instance:
 
 ```js
-var butter = require('buttercms')(' your butter API token ');
+var butter = require('buttercms')('api_token_567abe');
+```
+
+Using ES6:
+
+```js
+import Butter from 'buttercms';
+const butter = Butter('api_token_567abe');
+```
+
+Using CDN:
+
+```html
+<script>
+  var butter = Butter('api_token_567abe');
+</script>
 ```
 
 Every resource method returns a promise:
