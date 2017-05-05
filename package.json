@@ -11,11 +11,11 @@
   "engines": {
     "node": ">=0.10.32"
   },
-  "homepage": "https://github.com/buttercms/buttercms-node",
+  "homepage": "https://github.com/buttercms/buttercms-js",
   "author": "ButterCMS <support@buttercms.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/buttercms/buttercms-node.git"
+    "url": "git://github.com/buttercms/buttercms-js.git"
   },
   "main": "lib/butter.js",
   "dependencies": {
