@@ -1,6 +1,6 @@
 {
   "name": "buttercms",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "ButterCMS API Client",
   "keywords": [
     "buttercms",
@@ -10,6 +10,9 @@
   ],
   "engines": {
     "node": ">=0.10.32"
+  },
+  "scripts": {
+    "build": "webpack && uglifyjs ./dist/butter.js -c -m -o ./dist/butter.min.js --source-map ./dist/butter.min.js.map"
   },
   "homepage": "https://github.com/buttercms/buttercms-js",
   "author": "ButterCMS <support@buttercms.com>",
@@ -24,6 +27,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "uglify-js": "^2.8.22",
     "webpack": "^2.5.0"
   }
 }
