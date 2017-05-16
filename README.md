@@ -120,3 +120,7 @@ var butter = require('buttercms')('your butter API token', process.env.BUTTER_TE
 ## Documentation
 
 Documentation is available at https://buttercms.com/docs/api/node
+
+### Other
+
+View NodeJS [Blog engine](https://buttercms.com/nodejs-blog-engine/) and [Full CMS](https://buttercms.com/nodejs-cms/) for other examples of using ButterCMS with NodeJS.
