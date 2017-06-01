@@ -117,6 +117,14 @@ Or use an environment variable:
 var butter = require('buttercms')('your butter API token', process.env.BUTTER_TEST_MODE);
 ```
 
+## Timeouts
+
+The default timeout threshold is 3000ms but you can change it:
+
+```js
+var butter = require('buttercms')('your butter API token', false, 5000);
+```
+
 ## Documentation
 
 Documentation is available at https://buttercms.com/docs/api/node

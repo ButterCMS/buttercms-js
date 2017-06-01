@@ -650,9 +650,9 @@ var resources = {
   Content: __webpack_require__(5)
 }
 
-function Butter(apiToken, testMode) {
+function Butter(apiToken, testMode, timeout) {
   if (!(this instanceof Butter)) {
-    return new Butter(apiToken, testMode);
+    return new Butter(apiToken, testMode, timeout);
   }
 
   if (!apiToken) {
@@ -662,7 +662,10 @@ function Butter(apiToken, testMode) {
   // Use live mode by default
   var testMode = testMode || false;
 
-  var requestMethods = this._prepMethods(apiToken, testMode);
+  // 3000ms timeout by default
+  var timeout = timeout || 3000;
+
+  var requestMethods = this._prepMethods(apiToken, testMode, timeout);
 
   this._prepResources(requestMethods);
 }
@@ -675,12 +678,12 @@ Butter.prototype = {
       ] = new resources[name](requestMethods);
     }
   },
-  _prepMethods: function(apiToken, testMode) {
+  _prepMethods: function(apiToken, testMode, timeout) {
     return {
       get: function(url, params) {
         var conn = axios.create({
           baseURL: 'https://api.buttercms.com/v2',
-          timeout: 3000
+          timeout: timeout
         });
 
         var params = params || {};
