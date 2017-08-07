@@ -22,8 +22,7 @@
   },
   "main": "lib/butter.js",
   "dependencies": {
-    "axios": "0.9.1",
-    "polly-js": "1.4.3"
+    "axios": "0.9.1"
   },
   "license": "MIT",
   "devDependencies": {
