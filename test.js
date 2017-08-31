@@ -1,4 +1,4 @@
-var butter = require('./lib/butter')('b60a008584313ed21803780bc9208557b3b49fbb');
+var butter = require('./lib/butter')('b60a008584313ed21803780bc9208557b3b49fbb', true, 5);
 
 // butter.content.retrieve(["abis_team"], {locale: 'es'})
 //   .then(function(response) {
@@ -7,12 +7,12 @@ var butter = require('./lib/butter')('b60a008584313ed21803780bc9208557b3b49fbb')
 //     console.log(response)
 //   });
 
-// butter.post.list({page: 1, page_size: 10})
-//   .then(function(response) {
-//     console.log(response.data)
-//   }).catch(function(response) {
-//     console.log(response)
-//   });
+butter.post.list({page: 1, page_size: 10})
+  .then(function(response) {
+    console.log(response.data)
+  }).catch(function(response) {
+    console.log('this is an error', response)
+  });
 
 // butter.tag.list()
 //   .then(function(response) {

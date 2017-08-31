@@ -17,7 +17,7 @@ npm install buttercms --save
 Butter can also be included directly in HTML:
 
 ```html
-<script src="https://unpkg.com/buttercms@^1.0.0/dist/butter.min.js"></script>
+<script src="http://cdnjs.buttercms.com/buttercms-1.0.17.min.js"></script>
 ```
 
 ## Overview
