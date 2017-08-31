@@ -5,8 +5,6 @@ module.exports = {
   output: {
     filename: 'butter.js',
     library: 'Butter',
-    sourceMapFilename: 'butter.js.map',
     path: path.resolve(__dirname, 'dist')
-  },
-  devtool: 'source-map'
+  }
 };
