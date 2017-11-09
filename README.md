@@ -90,6 +90,9 @@ Where you see params it is a plain js object, e.g. `{page: 1}`
   * `retrieve(type[, params])`
 * content
   * `retrieve(keys)`
+* page
+  * `retrieve(page_type, page_slug[, params])`
+  * `list(page_type[, params])`
 
 ## Localization
 
