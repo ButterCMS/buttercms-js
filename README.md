@@ -50,28 +50,47 @@ Every resource method returns a promise:
 butter.post.list({page: 1, page_size: 10}).then(function(response) {
   console.log(response)
 })
+```
 
-// Get blog post
-butter.post.retrieve("hello-world").then(function(response) {
-  console.log(response)
-})
+## Pages
 
-// Get homepage content
-butter.content.retrieve(["home"]).then(function(resp) {
-  console.log(resp)
-});
+Where you see params it is a plain js object, e.g. `{page: 1}`. For a list of params see the [API documentation](https://buttercms.com/docs/api/)
 
+* page
+  * `retrieve(page_type, page_slug[, params])`
+  * `list(page_type[, params])`
+
+## Content fields
+
+* content
+  * `retrieve(keys)`
+
+### Localization
+
+Setup locales in the ButterCMS dashboard and fetch localized content using the locale option:
+
+```js
 // Get pages
-butter.content.retrieve(["pages"]).then(function(resp) {
+butter.content.retrieve(["pages"], {locale: 'es'}).then(function(resp) {
   console.log(resp)
 });
 ```
 
-See our [node app](https://github.com/buttercms/nodejs-cms-express-blog) for a full example.
+### Test mode
 
-## Available resources & methods
+Test mode can be used to setup a staging website for previewing content fields or for testing content during local development. To fetch content from test mode add an additional argument, `true`, to the package initialization:
 
-Where you see params it is a plain js object, e.g. `{page: 1}`
+```js
+var butter = require('buttercms')('your butter API token', true);
+```
+
+Or use an environment variable:
+
+```js
+var butter = require('buttercms')('your butter API token', process.env.BUTTER_TEST_MODE);
+```
+
+## Blog Engine
 
 * post
   * `retrieve(slug[, params])`
@@ -88,37 +107,9 @@ Where you see params it is a plain js object, e.g. `{page: 1}`
   * `list([params])`
 * feed
   * `retrieve(type[, params])`
-* content
-  * `retrieve(keys)`
-* page
-  * `retrieve(page_type, page_slug[, params])`
-  * `list(page_type[, params])`
+  
+See our [node app](https://github.com/buttercms/nodejs-cms-express-blog) for a full example.
 
-## Localization
-
-Setup locales in the ButterCMS dashboard and fetch localized content using the locale option:
-
-
-```js
-// Get pages
-butter.content.retrieve(["pages"], {locale: 'es'}).then(function(resp) {
-  console.log(resp)
-});
-```
-
-## Test mode
-
-Test mode can be used to setup a staging website for previewing content or for testing content during local development. To fetch content from test mode add an additional argument, `true`, to the package initialization:
-
-```js
-var butter = require('buttercms')('your butter API token', true);
-```
-
-Or use an environment variable:
-
-```js
-var butter = require('buttercms')('your butter API token', process.env.BUTTER_TEST_MODE);
-```
 
 ## Timeouts
 
