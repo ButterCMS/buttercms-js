@@ -17,7 +17,7 @@ npm install buttercms --save
 Butter can also be included directly in HTML:
 
 ```html
-<script src="https://cdnjs.buttercms.com/buttercms-1.0.17.min.js"></script>
+<script src="https://cdnjs.buttercms.com/buttercms-1.1.0.min.js"></script>
 ```
 
 ## Overview
@@ -90,6 +90,9 @@ Where you see params it is a plain js object, e.g. `{page: 1}`
   * `retrieve(type[, params])`
 * content
   * `retrieve(keys)`
+* page
+  * `retrieve(page_type, page_slug[, params])`
+  * `list(page_type[, params])`
 
 ## Localization
 
