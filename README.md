@@ -59,6 +59,13 @@ Where you see params it is a plain js object, e.g. `{page: 1}`. For a list of pa
 * page
   * `retrieve(page_type, page_slug[, params])`
   * `list(page_type[, params])`
+  
+ ```js
+// Get page
+butter.page.retrieve('casestudy', 'acme-co').then(function(resp) {
+  console.log(resp)
+});
+```
 
 ## Content fields
 
@@ -70,8 +77,8 @@ Where you see params it is a plain js object, e.g. `{page: 1}`. For a list of pa
 Setup locales in the ButterCMS dashboard and fetch localized content using the locale option:
 
 ```js
-// Get pages
-butter.content.retrieve(["pages"], {locale: 'es'}).then(function(resp) {
+// Get FAQ
+butter.content.retrieve(["faq"], {locale: 'es'}).then(function(resp) {
   console.log(resp)
 });
 ```
