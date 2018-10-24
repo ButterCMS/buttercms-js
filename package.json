@@ -21,6 +21,7 @@
     "url": "git://github.com/buttercms/buttercms-js.git"
   },
   "main": "lib/butter.js",
+  "types": "lib/butter.d.ts",
   "dependencies": {
     "axios": "0.9.1"
   },
