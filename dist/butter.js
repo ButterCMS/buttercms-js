@@ -64,7 +64,7 @@ var Butter =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 12);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -326,11 +326,11 @@ module.exports = {
 
 
 var utils = __webpack_require__(0);
-var buildURL = __webpack_require__(19);
-var parseHeaders = __webpack_require__(24);
+var buildURL = __webpack_require__(18);
+var parseHeaders = __webpack_require__(23);
 var transformData = __webpack_require__(2);
-var isURLSameOrigin = __webpack_require__(23);
-var btoa = window.btoa || __webpack_require__(18);
+var isURLSameOrigin = __webpack_require__(22);
+var btoa = window.btoa || __webpack_require__(17);
 
 module.exports = function xhrAdapter(resolve, reject, config) {
   var requestData = config.data;
@@ -405,7 +405,7 @@ module.exports = function xhrAdapter(resolve, reject, config) {
   // This is only done if running in a standard browser environment.
   // Specifically not if we're in a web worker, or react-native.
   if (utils.isStandardBrowserEnv()) {
-    var cookies = __webpack_require__(21);
+    var cookies = __webpack_require__(20);
 
     // Add xsrf header
     var xsrfValue = config.withCredentials || isURLSameOrigin(config.url) ?
@@ -651,54 +651,18 @@ module.exports = Tag;
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(13);
+module.exports = __webpack_require__(12);
 
 /***/ }),
 /* 11 */
-/***/ (function(module, exports) {
-
-module.exports = {
-	"name": "buttercms",
-	"version": "1.1.0",
-	"description": "ButterCMS API Client",
-	"keywords": [
-		"buttercms",
-		"butter",
-		"cms",
-		"api"
-	],
-	"engines": {
-		"node": ">=0.10.32"
-	},
-	"scripts": {
-		"build": "webpack && uglifyjs ./dist/butter.js -c -m -o ./dist/butter.min.js"
-	},
-	"homepage": "https://github.com/buttercms/buttercms-js",
-	"author": "ButterCMS <support@buttercms.com>",
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/buttercms/buttercms-js.git"
-	},
-	"main": "lib/butter.js",
-	"dependencies": {
-		"axios": "0.9.1"
-	},
-	"license": "MIT",
-	"devDependencies": {
-		"uglify-js": "^2.8.22",
-		"webpack": "^2.5.0"
-	}
-};
-
-/***/ }),
-/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
+var BUTTER_CLIENT_VERSION = '1.1.3';
+
 var axios = __webpack_require__(10);
-var config = __webpack_require__(11);
 
 var resources = {
   Post: __webpack_require__(8),
@@ -744,7 +708,7 @@ Butter.prototype = {
         var conn = axios.create({
           baseURL: 'https://api.buttercms.com/v2',
           timeout: timeout,
-          headers: {'X-Butter-Client': 'JS/' + config.version}
+          headers: {'X-Butter-Client': 'JS/' + BUTTER_CLIENT_VERSION}
         });
 
         var params = params || {};
@@ -767,19 +731,19 @@ module.exports = Butter;
 
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var defaults = __webpack_require__(16);
+var defaults = __webpack_require__(15);
 var utils = __webpack_require__(0);
-var dispatchRequest = __webpack_require__(15);
-var InterceptorManager = __webpack_require__(14);
-var isAbsoluteURL = __webpack_require__(22);
-var combineURLs = __webpack_require__(20);
-var bind = __webpack_require__(17);
+var dispatchRequest = __webpack_require__(14);
+var InterceptorManager = __webpack_require__(13);
+var isAbsoluteURL = __webpack_require__(21);
+var combineURLs = __webpack_require__(19);
+var bind = __webpack_require__(16);
 var transformData = __webpack_require__(2);
 
 function Axios(defaultConfig) {
@@ -863,7 +827,7 @@ axios.defaults = defaultInstance.defaults;
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(25);
+axios.spread = __webpack_require__(24);
 
 // Expose interceptors
 axios.interceptors = defaultInstance.interceptors;
@@ -894,7 +858,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -953,7 +917,7 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -992,10 +956,10 @@ module.exports = function dispatchRequest(config) {
 };
 
 
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(26)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(25)))
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1065,7 +1029,7 @@ module.exports = {
 
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1083,7 +1047,7 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 18 */
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1126,7 +1090,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 19 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1200,7 +1164,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 20 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1219,7 +1183,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 21 */
+/* 20 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1279,7 +1243,7 @@ module.exports = (
 
 
 /***/ }),
-/* 22 */
+/* 21 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1300,7 +1264,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 23 */
+/* 22 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1375,7 +1339,7 @@ module.exports = (
 
 
 /***/ }),
-/* 24 */
+/* 23 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1419,7 +1383,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 25 */
+/* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -1453,7 +1417,7 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 26 */
+/* 25 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
