@@ -61,7 +61,7 @@ butter.post.list({page: 1, page_size: 10}).then(function(response) {
 
 ## Pages
 
-Where you see params it is a plain js object, e.g. `{page: 1}`. For a list of params see the [API documentation](https://buttercms.com/docs/api/)
+Where you see params it is a plain js object, e.g. `{page: 1}`. For a list of params see the [API documentation](https://buttercms.com/docs/api/?javascript)
 
 * page
   * `retrieve(page_type, page_slug[, params])`
@@ -77,12 +77,8 @@ butter.page.retrieve('casestudy', 'acme-co').then(function(resp) {
 ## Content fields
 
 * content
-  * `retrieve(keys)`
-
-### Localization
-
-Setup locales in the ButterCMS dashboard and fetch localized content using the locale option:
-
+  * `retrieve(collection[, params])`
+  
 ```js
 // Get FAQ
 butter.content.retrieve(["faq"], {locale: 'es'}).then(function(resp) {
@@ -90,9 +86,9 @@ butter.content.retrieve(["faq"], {locale: 'es'}).then(function(resp) {
 });
 ```
 
-### Test mode
+### Preview mode
 
-Test mode can be used to setup a staging website for previewing content fields or for testing content during local development. To fetch content from test mode add an additional argument, `true`, to the package initialization:
+Preview mode can be used to setup a staging website for previewing content fields or for testing content during local development. To fetch content from preview mode add an additional argument, `true`, to the package initialization:
 
 ```js
 var butter = require('buttercms')('your butter API token', true);
@@ -101,7 +97,7 @@ var butter = require('buttercms')('your butter API token', true);
 Or use an environment variable:
 
 ```js
-var butter = require('buttercms')('your butter API token', process.env.BUTTER_TEST_MODE);
+var butter = require('buttercms')('your butter API token', process.env.BUTTER_PREVIEW_MODE);
 ```
 
 ## Blog Engine
