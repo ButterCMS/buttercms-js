@@ -74,7 +74,7 @@ butter.page.retrieve('casestudy', 'acme-co').then(function(resp) {
 });
 ```
 
-## Content fields
+## Collections
 
 * content
   * `retrieve(collection[, params])`
