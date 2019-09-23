@@ -129,6 +129,22 @@ The default timeout threshold is 3000ms but you can change it:
 var butter = require('buttercms')('your butter API token', false, 5000);
 ```
 
+## Axios hook
+
+If you need to custom headers, caching, automatic retry or any other specific functionality on the transport layer, you can hook up into the [Axios](https://github.com/axios/axios) instance creation process. Supply the `axiosHook` callback parameter and Butter will call you when Axios is being created:
+
+```js
+function axiosHook(axios) {
+  axios.interceptors.request.use(function requestLogger(config) {
+    console.warn("Axios requested", config.url, config.params)
+
+    return config;
+  })
+}
+
+var butter = require('buttercms')('your butter API token', false, 5000, axiosHook);
+```
+
 ## Documentation
 
 Documentation is available at https://buttercms.com/docs/api/node

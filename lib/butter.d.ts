@@ -1,4 +1,6 @@
-declare var Butter: (apiToken: string, testMode?: boolean, timeout?: number) => ButterStatic;
+import { AxiosInstance } from "axios";
+
+declare var Butter: (apiToken: string, testMode?: boolean, timeout?: number, axiosHook?: (axios: AxiosInstance) => unknown) => ButterStatic;
 
 declare interface ButterResponse {
   data?: any;
