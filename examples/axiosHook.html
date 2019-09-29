@@ -18,7 +18,7 @@
         })
       }
 
-      var butter = Butter('b60a008584313ed21803780bc9208557b3b49fbb', false, 3000, axiosHook);
+      var butter = Butter('api_token', false, 3000, axiosHook);
 
       butter.post.list({page: 1, page_size: 10}).then(function(resp) {
         var body = resp.data;
