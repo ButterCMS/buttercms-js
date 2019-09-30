@@ -1,0 +1,41 @@
+<html>
+<head>
+  <title>Example usage with Axios interceptors</title>
+</head>
+<body>
+  <div id="posts">
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.buttercms.com/buttercms-1.0.17.min.js"></script>
+  <script>
+    $(function() {
+      function axiosHook(axios) {
+        axios.interceptors.request.use(function requestLogger(config) {
+          console.warn("Axios requested", config.url, config.params)
+
+          return config;
+        })
+      }
+
+      var butter = Butter('api_token', false, 3000, axiosHook);
+
+      butter.post.list({page: 1, page_size: 10}).then(function(resp) {
+        var body = resp.data;
+
+        var data = {
+          posts: resp.data.data,
+          next_page: resp.data.meta.next_page,
+          previous_page: resp.data.meta.previous_page
+        };
+
+        for(i = 0; i < data.posts.length; i++) {
+          var title = data.posts[i].title;
+
+          $('#posts').append(title + "<br>")
+        }
+      });
+    });
+  </script>
+</body>
+</html>
