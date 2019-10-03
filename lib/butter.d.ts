@@ -54,6 +54,4 @@ declare interface ButterStatic {
   content: ButterContentMethods;
 }
 
-declare module "buttercms" {
-  export = Butter;
-}
+export = Butter;
