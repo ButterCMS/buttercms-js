@@ -57,20 +57,20 @@ declare module "buttercms" {
     feed: Butter.FeedMethods;
     page: Butter.PageMethods;
     content: Butter.ContentMethods;
-    new(
+    constructor(
       apiToken: string,
       testMode?: boolean,
       timeout?: number,
       axiosHook?: (axios: AxiosInstance) => unknown
-    ): ButterStatic;
+    );
   }
+
+  export const Butter: (
+    apiToken: string,
+    testMode?: boolean,
+    timeout?: number,
+    axiosHook?: (axios: AxiosInstance) => unknown
+  ) => ButterStatic;
+
+  export default Butter;
 }
-
-export const Butter: (
-  apiToken: string,
-  testMode?: boolean,
-  timeout?: number,
-  axiosHook?: (axios: AxiosInstance) => unknown
-) => ButterStatic;
-
-export default Butter;
