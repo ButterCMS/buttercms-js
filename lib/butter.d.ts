@@ -1,57 +1,74 @@
 import { AxiosInstance } from "axios";
 
-declare var Butter: (apiToken: string, testMode?: boolean, timeout?: number, axiosHook?: (axios: AxiosInstance) => unknown) => ButterStatic;
+export namespace Butter {
+  interface Response {
+    data?: any;
+    status?: number;
+    statusText?: string;
+    headers?: any;
+    config?: any;
+  }
 
-declare interface ButterResponse {
-  data?: any;
-  status?: number;
-  statusText?: string;
-  headers?: any;
-  config?: any;
+  interface PostMethods {
+    retrieve(slug: string, params?: any): Promise<Response>;
+    list(params?: any): Promise<Response>;
+    search(query: string, params?: any): Promise<Response>;
+  }
+
+  interface CategoryMethods {
+    retrieve(slug: string, params?: any): Promise<Response>;
+    list(params?: any): Promise<Response>;
+  }
+
+  interface TagMethods {
+    retrieve(slug: string, params?: any): Promise<Response>;
+    list(params?: any): Promise<Response>;
+  }
+
+  interface AuthorMethods {
+    retrieve(slug: string, params?: any): Promise<Response>;
+    list(params?: any): Promise<Response>;
+  }
+
+  interface FeedMethods {
+    retrieve(slug: string, params?: any): Promise<Response>;
+  }
+
+  interface PageMethods {
+    retrieve(
+      page_type: string,
+      page_slug: string,
+      params?: any
+    ): Promise<Response>;
+    list(page_type: string, params?: any): Promise<Response>;
+  }
+
+  interface ContentMethods {
+    retrieve(keys: Array<string>, params?: any): Promise<Response>;
+  }
 }
 
-declare interface ButterPostMethods {
-  retrieve(slug: string, params?: any): Promise<ButterResponse>;
-  list(params?: any): Promise<ButterResponse>;
-  search(query: string, params?: any): Promise<ButterResponse>;
+export class ButterStatic {
+  post: Butter.PostMethods;
+  category: Butter.CategoryMethods;
+  tag: Butter.TagMethods;
+  author: Butter.AuthorMethods;
+  feed: Butter.FeedMethods;
+  page: Butter.PageMethods;
+  content: Butter.ContentMethods;
+  constructor(
+    apiToken: string,
+    testMode?: boolean,
+    timeout?: number,
+    axiosHook?: (axios: AxiosInstance) => unknown
+  );
 }
 
-declare interface ButterCategoryMethods {
-  retrieve(slug: string, params?: any): Promise<ButterResponse>;
-  list(params?: any): Promise<ButterResponse>;
-}
+export const Butter: (
+  apiToken: string,
+  testMode?: boolean,
+  timeout?: number,
+  axiosHook?: (axios: AxiosInstance) => unknown
+) => ButterStatic;
 
-declare interface ButterTagMethods {
-  retrieve(slug: string, params?: any): Promise<ButterResponse>;
-  list(params?: any): Promise<ButterResponse>;
-}
-
-declare interface ButterAuthorMethods {
-  retrieve(slug: string, params?: any): Promise<ButterResponse>;
-  list(params?: any): Promise<ButterResponse>;
-}
-
-declare interface ButterFeedMethods {
-  retrieve(slug: string, params?: any): Promise<ButterResponse>;
-}
-
-declare interface ButterPageMethods {
-  retrieve(page_type: string, page_slug: string, params?: any): Promise<ButterResponse>;
-  list(page_type: string, params?: any): Promise<ButterResponse>;
-}
-
-declare interface ButterContentMethods {
-  retrieve(keys: Array<string>, params?: any): Promise<ButterResponse>;
-}
-
-declare interface ButterStatic {
-  post: ButterPostMethods;
-  category: ButterCategoryMethods;
-  tag: ButterTagMethods;
-  author: ButterAuthorMethods;
-  feed: ButterFeedMethods;
-  page: ButterPageMethods;
-  content: ButterContentMethods;
-}
-
-export = Butter;
+export default Butter;
