@@ -1090,7 +1090,7 @@ module.exports = __webpack_require__(18);
 "use strict";
 
 
-var BUTTER_CLIENT_VERSION = '1.1.3';
+var BUTTER_CLIENT_VERSION = '1.2.5';
 
 var axios = __webpack_require__(16);
 
