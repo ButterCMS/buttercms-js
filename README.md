@@ -25,7 +25,7 @@ Butter can also be included directly in HTML:
 Every resource is accessed via your butter instance:
 
 ```js
-var butter = require('buttercms')('api_token_567abe');
+const butter = require('buttercms')('api_token_567abe');
 ```
 
 Using ES6:
@@ -46,7 +46,7 @@ Using CDN:
 
 ```html
 <script>
-  var butter = Butter('api_token_567abe');
+  const butter = Butter('api_token_567abe');
 </script>
 ```
 
@@ -91,13 +91,13 @@ butter.content.retrieve(["faq"], {locale: 'es'}).then(function(resp) {
 Preview mode can be used to setup a staging website for previewing content fields or for testing content during local development. To fetch content from preview mode add an additional argument, `true`, to the package initialization:
 
 ```js
-var butter = require('buttercms')('your butter API token', true);
+const butter = require('buttercms')('your butter API token', true);
 ```
 
 Or use an environment variable:
 
 ```js
-var butter = require('buttercms')('your butter API token', process.env.BUTTER_PREVIEW_MODE);
+const butter = require('buttercms')('your butter API token', process.env.BUTTER_PREVIEW_MODE);
 ```
 
 ## Blog Engine
@@ -126,7 +126,7 @@ See our [node app](https://github.com/buttercms/nodejs-cms-express-blog) for a f
 The default timeout threshold is 3000ms but you can change it:
 
 ```js
-var butter = require('buttercms')('your butter API token', false, 5000);
+const butter = require('buttercms')('your butter API token', false, 5000);
 ```
 
 ## Axios hook
@@ -142,7 +142,7 @@ function axiosHook(axios) {
   })
 }
 
-var butter = require('buttercms')('your butter API token', false, 5000, axiosHook);
+const butter = require('buttercms')('your butter API token', false, 5000, axiosHook);
 ```
 
 ## Documentation
