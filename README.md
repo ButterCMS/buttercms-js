@@ -38,7 +38,7 @@ const butter = Butter('api_token_567abe');
 Using TypeScript:
 
 ```js
-import Butter = require('buttercms');
+import Butter from 'buttercms';
 const butter = Butter('api_token_567abe');
 ```
 
