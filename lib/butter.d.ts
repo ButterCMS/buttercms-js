@@ -41,6 +41,7 @@ export namespace Butter {
       params?: any
     ): Promise<Response>;
     list(page_type: string, params?: any): Promise<Response>;
+    search(query: string, params?: any): Promise<Response>;
   }
 
   interface ContentMethods {
