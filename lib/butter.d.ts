@@ -25,9 +25,16 @@ export namespace Butter {
     list(params?: any): Promise<Response>;
   }
 
+  interface AuthorParams {
+    /**
+     * Get 10 most recent articles by the author
+     */
+    include?: 'recent_posts'
+  }
+
   interface AuthorMethods {
-    retrieve(slug: string, params?: any): Promise<Response>;
-    list(params?: any): Promise<Response>;
+    retrieve(slug: string, params?: AuthorParams): Promise<Response>;
+    list(params?: AuthorParams): Promise<Response>;
   }
 
   interface FeedMethods {
