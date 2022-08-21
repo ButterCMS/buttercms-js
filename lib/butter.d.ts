@@ -5,8 +5,8 @@ export namespace Butter {
     data?: any;
     status?: number;
     statusText?: string;
-    headers?: any;
-    config?: any;
+    headers?: Record<string, any>;
+    config?: Record<string, any>;
   }
 
   interface PostMethods {
