@@ -25,6 +25,10 @@ export namespace Butter {
     list(params?: any): Promise<Response>;
   }
 
+  ////////////
+  // Author //
+  ////////////
+
   interface AuthorParams {
     /**
      * Get 10 most recent articles by the author
@@ -32,9 +36,37 @@ export namespace Butter {
     include?: 'recent_posts'
   }
 
+  interface Author<AuthorSlug extends string = string> {
+    first_name: string
+    last_name: string
+    email: string
+    slug: AuthorSlug
+    bio: string
+    title: string
+    linkedin_url: `https://www.linkedin.com/in/${string}`
+    facebook_url: `https://www.facebook.com/${string}`
+    pinterest_url: `https://www.pinterest.com/${string}`
+    instagram_url: `https://www.instagram.com/${string}`
+    twitter_handle: string
+    profile_image: `https://cdn.buttercms.com/${string}`
+    recent_posts: Record<string, any>[]
+  }
+
+  interface AuthorRetrieveResponse<AuthorSlug extends string = string> extends Response {
+    data: {
+      data: Author<AuthorSlug>
+    }
+  }
+
+  interface AuthorListResponse extends Response {
+    data: {
+      data: Author[]
+    }
+  }
+
   interface AuthorMethods {
-    retrieve(slug: string, params?: AuthorParams): Promise<Response>;
-    list(params?: AuthorParams): Promise<Response>;
+    retrieve<AuthorSlug extends string = string>(slug: string, params?: AuthorParams): Promise<AuthorRetrieveResponse<AuthorSlug>>;
+    list(params?: AuthorParams): Promise<AuthorListResponse>;
   }
 
   interface FeedMethods {
