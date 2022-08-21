@@ -48,9 +48,45 @@ export namespace Butter {
     search(query: string, params?: any): Promise<Response>;
   }
 
+  //////////////
+  // Category //
+  //////////////
+
+  interface CategoryParams {
+    /**
+     * If undefined, it will only get the details on the category and not any articles relating to it
+     */
+    include?: "recent_posts";
+  }
+
+  interface CategoryRetrieveResponse<CategorySlug extends string = string>
+    extends Response {
+    data: {
+      data: {
+        name: string;
+        slug: CategorySlug;
+        recent_posts?: Record<string, any>[];
+      };
+    };
+  }
+
+  interface CategoryListResponse extends Response {
+    data: {
+      data: {
+        name: string;
+        slug: string;
+        recent_posts?: Record<string, any>[];
+      }[];
+    };
+  }
+
   interface CategoryMethods {
-    retrieve(slug: string, params?: any): Promise<Response>;
-    list(params?: any): Promise<Response>;
+    retrieve<CategorySlug extends string = string>(
+      slug: CategorySlug,
+      params?: CategoryParams
+    ): Promise<CategoryRetrieveResponse<CategorySlug>>;
+
+    list(params?: CategoryParams): Promise<CategoryListResponse>;
   }
 
   interface TagMethods {
