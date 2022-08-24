@@ -96,9 +96,42 @@ export namespace Butter {
     list(params?: CategoryParams): Promise<CategoryListResponse>;
   }
 
+  /////////
+  // Tag //
+  /////////
+
+  interface TagParams {
+    /**
+     * Get 10 most recent articles of this tag
+     */
+    include?: "recent_posts";
+  }
+
+  interface Tag<TagSlug extends string = string> {
+    name: string;
+    slug: TagSlug;
+    recent_posts?: Record<string, any>[];
+  }
+
+  interface TagRetrieveResponse<TagSlug extends string = string> {
+    data: {
+      data: Tag<TagSlug>;
+    };
+  }
+
+  interface TagListResponse<TagSlug extends string = string> {
+    data: {
+      data: Tag<TagSlug>[];
+    };
+  }
+
   interface TagMethods {
-    retrieve(slug: string, params?: any): Promise<Response>;
-    list(params?: any): Promise<Response>;
+    retrieve<TagSlug extends string = string>(
+      slug: TagSlug,
+      params?: TagParams
+    ): Promise<TagRetrieveResponse<TagSlug>>;
+
+    list(params?: TagParams): Promise<TagListResponse>;
   }
 
   ////////////
