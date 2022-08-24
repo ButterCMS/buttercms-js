@@ -24,6 +24,13 @@ type WithFieldsPrefix<Type extends object> = {
     : never]?: FlatValue<NonNullable<Type>, Key>;
 };
 
+// Creates a type where the CollectionModel keys are also prefixed with "-" for a decreasing order
+type OrderParam<CollectionModel> = {
+  [Key in keyof CollectionModel as Key extends string
+    ? `${"-" | ""}${Key}`
+    : never]: CollectionModel[Key];
+};
+
 export namespace Butter {
   ///////////////////
   // Utility types //
@@ -238,8 +245,25 @@ export namespace Butter {
     ): Promise<PageSearchResponse<PageModel, PageType>>;
   }
 
+  /////////////
+  // Content //
+  /////////////
+
+  type ContentParams<ContentModel extends object = object> =
+    WithFieldsPrefix<ContentModel> & {
+      test?: 0 | 1;
+      /**
+       * Order collection by a specific property.
+       * _Prefix with "-" for decreasing order._
+       */
+      order?: keyof OrderParam<ContentModel>;
+      page?: number;
+      page_size?: number;
+      levels?: number;
+    };
+
   interface ContentMethods {
-    retrieve(keys: Array<string>, params?: any): Promise<Response>;
+    retrieve(keys: Array<string>, params?: ContentParams): Promise<Response>;
   }
 }
 
