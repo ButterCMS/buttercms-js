@@ -49,10 +49,43 @@ export namespace Butter {
     config?: Record<string, any>;
   }
 
+  //////////
+  // Post //
+  //////////
+
+  interface PostRetrieveParams {
+    preview?: 1 | 0;
+  }
+
+  interface PostListParams<AuthorSlug extends string = string> {
+    preview?: 1 | 0;
+    /**
+     * If true, it will only get the article's details and not the article content
+     */
+    exclude_body?: boolean;
+    page?: number;
+    page_size?: number;
+    author_slug?: AuthorSlug;
+    category_slug?: string;
+    tag_slug?: string;
+  }
+
+  interface PostSearchParams {
+    page?: number;
+    page_size?: number;
+  }
+
   interface PostMethods {
-    retrieve(slug: string, params?: any): Promise<Response>;
-    list(params?: any): Promise<Response>;
-    search(query: string, params?: any): Promise<Response>;
+    retrieve<ArticleSlug extends string = string>(
+      slug: ArticleSlug,
+      params?: PostRetrieveParams
+    ): Promise<Response>;
+
+    list<AuthorSlug extends string = string>(
+      params?: PostListParams<AuthorSlug>
+    ): Promise<Response>;
+
+    search(query: string, params?: PostSearchParams): Promise<Response>;
   }
 
   //////////////
