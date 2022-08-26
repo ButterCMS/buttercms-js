@@ -61,7 +61,7 @@ export namespace Butter {
     count: number;
   }
 
-  interface Response<Data extends object | string> {
+  interface Response<Data extends object | string = any> {
     data?: Data;
     status?: number;
     statusText?: string;
