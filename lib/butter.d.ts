@@ -61,7 +61,7 @@ export namespace Butter {
     count: number;
   }
 
-  interface Response<Data extends object> {
+  interface Response<Data extends object | string> {
     data?: Data;
     status?: number;
     statusText?: string;
@@ -265,8 +265,22 @@ export namespace Butter {
     list(params?: AuthorParams): Promise<Response<AuthorListResponse>>;
   }
 
+  //////////
+  // Feed //
+  //////////
+
+  type FeedTypes = "atom" | "rss" | "sitemap";
+
+  interface FeedParams {
+    category_slug?: string;
+    tag_slug?: string;
+  }
+
   interface FeedMethods {
-    retrieve(slug: string, params?: any): Promise<Response<object>>;
+    retrieve(
+      feedType: FeedTypes,
+      params?: FeedParams
+    ): Promise<Response<string>>;
   }
 
   //////////
