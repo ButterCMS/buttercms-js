@@ -79,9 +79,6 @@ export namespace Butter {
 
   interface PostListParams<AuthorSlug extends string = string> {
     preview?: 1 | 0;
-    /**
-     * If true, it will only get the article's details and not the article content
-     */
     exclude_body?: boolean;
     page?: number;
     page_size?: number;
@@ -138,15 +135,35 @@ export namespace Butter {
   }
 
   interface PostMethods {
+    /**
+     * Retrieve a post
+     * @param slug The post's slug
+     * @param params Optional params
+     * @example
+     * retrieve<'how-to-use-butter'>('how-to-use-butter')
+     */
     retrieve<PostSlug extends string = string>(
       slug: PostSlug,
       params?: PostRetrieveParams
     ): Promise<Response<PostRetrieveResponse<string, PostSlug>>>;
 
+    /**
+     * Get a list of posts
+     * @param params Optional params
+     * @example
+     * list()
+     */
     list<AuthorSlug extends string = string>(
       params?: PostListParams<AuthorSlug>
     ): Promise<Response<PostListResponse<AuthorSlug>>>;
 
+    /**
+     * Search posts based on a query
+     * @param query The query
+     * @param params Optional params
+     * @example
+     * search('my query')
+     */
     search(
       query: string,
       params?: PostSearchParams
@@ -159,7 +176,7 @@ export namespace Butter {
 
   interface CategoryParams {
     /**
-     * If undefined, it will only get the details on the category and not any articles relating to it
+     * Get 10 most recent posts of this category
      */
     include?: "recent_posts";
   }
@@ -179,11 +196,24 @@ export namespace Butter {
   }
 
   interface CategoryMethods {
+    /**
+     * Retrieve a category
+     * @param slug The category's slug
+     * @param params Optional params
+     * @example
+     * retrieve<'some-category'>('some-category')
+     */
     retrieve<CategorySlug extends string = string>(
       slug: CategorySlug,
       params?: CategoryParams
     ): Promise<Response<CategoryRetrieveResponse<CategorySlug>>>;
 
+    /**
+     * Get all categories
+     * @param params Optional params
+     * @example
+     * list()
+     */
     list(params?: CategoryParams): Promise<Response<CategoryListResponse>>;
   }
 
@@ -193,7 +223,7 @@ export namespace Butter {
 
   interface TagParams {
     /**
-     * Get 10 most recent articles of this tag
+     * Get 10 most recent posts of this tag
      */
     include?: "recent_posts";
   }
@@ -213,11 +243,24 @@ export namespace Butter {
   }
 
   interface TagMethods {
+    /**
+     * Retrieve a tag
+     * @param slug The tag's slug
+     * @param params Optional params
+     * @example
+     * retrieve<'some-tag'>('some-tag')
+     */
     retrieve<TagSlug extends string = string>(
       slug: TagSlug,
       params?: TagParams
     ): Promise<Response<TagRetrieveResponse<TagSlug>>>;
 
+    /**
+     * Get all tags
+     * @param params Optional params
+     * @example
+     * list()
+     */
     list(params?: TagParams): Promise<Response<TagListResponse>>;
   }
 
@@ -227,7 +270,7 @@ export namespace Butter {
 
   interface AuthorParams {
     /**
-     * Get 10 most recent articles by the author
+     * Get 10 most recent posts by the author
      */
     include?: "recent_posts";
   }
@@ -239,12 +282,12 @@ export namespace Butter {
     slug: AuthorSlug;
     bio: string;
     title: string;
-    linkedin_url: `https://www.linkedin.com/in/${string}`;
-    facebook_url: `https://www.facebook.com/${string}`;
-    pinterest_url: `https://www.pinterest.com/${string}`;
-    instagram_url: `https://www.instagram.com/${string}`;
+    linkedin_url: string;
+    facebook_url: string;
+    pinterest_url: string;
+    instagram_url: string;
     twitter_handle: string;
-    profile_image: `https://cdn.buttercms.com/${string}`;
+    profile_image: string;
     recent_posts?: Post[];
   }
 
@@ -257,11 +300,24 @@ export namespace Butter {
   }
 
   interface AuthorMethods {
+    /**
+     * Retrieve an author
+     * @param slug The author's slug
+     * @param params Optional params
+     * @example
+     * retrieve<'joe-bloggs'>('joe-bloggs')
+     */
     retrieve<AuthorSlug extends string = string>(
       slug: string,
       params?: AuthorParams
     ): Promise<Response<AuthorRetrieveResponse<AuthorSlug>>>;
 
+    /**
+     * Get a list of authors
+     * @param params Optional params
+     * @example
+     * list()
+     */
     list(params?: AuthorParams): Promise<Response<AuthorListResponse>>;
   }
 
@@ -277,6 +333,15 @@ export namespace Butter {
   }
 
   interface FeedMethods {
+    /**
+     * Get a feed
+     * @param feedType The type of feed
+     * @param params Optional params
+     * @example
+     * retrieve('atom')
+     * retrieve('rss')
+     * retrieve('sitemap')
+     */
     retrieve(
       feedType: FeedTypes,
       params?: FeedParams
@@ -347,6 +412,15 @@ export namespace Butter {
   }
 
   interface PageMethods {
+    /**
+     * Retrieve a single page
+     * @param page_type The page type
+     * @param page_slug The page slug
+     * @param params Optional params
+     * @example
+     * interface LandingPage { ... }
+     * retrieve<LandingPage, 'landing_page', 'our_services'>('landing_page', 'our_services')
+     */
     retrieve<
       PageModel extends object = object,
       PageType extends string = string,
@@ -357,11 +431,31 @@ export namespace Butter {
       params?: PageRetrieveParams
     ): Promise<Response<PageRetrieveResponse<PageModel, PageType, PageSlug>>>;
 
+    /**
+     * Get multiple pages of the same page type
+     * @param page_type The page type
+     * @param params Optional params
+     * @example
+     * interface LandingPage { ... }
+     * list<LandingPage, 'landing_page'>('landing_page')
+     */
     list<PageModel extends object = object, PageType extends string = string>(
       page_type: PageType,
       params?: PageListParams
     ): Promise<Response<PageListResponse<PageModel, PageType>>>;
 
+    /**
+     * Search pages based on a query
+     * @param query The query
+     * @param params Optional params
+     * @example
+     * // Generic search
+     * search('my query')
+     *
+     * // Search all pages of the same page type
+     * interface LandingPage { ... }
+     * search<LandingPage, 'landing_page'>('my query', { page_type: 'landing_type' })
+     */
     search<PageModel extends object = object, PageType extends string = string>(
       query: string,
       params?: PageSearchParams<PageType>
@@ -375,10 +469,6 @@ export namespace Butter {
   type ContentParams<ContentModel extends object = object> =
     WithFieldsPrefix<ContentModel> & {
       test?: 0 | 1;
-      /**
-       * Order collection by a specific property.
-       * _Prefix with "-" for decreasing order._
-       */
       order?: keyof OrderParam<ContentModel>;
       page?: number;
       page_size?: number;
@@ -386,16 +476,25 @@ export namespace Butter {
     };
 
   interface ContentResponse<ContentModels extends object = object> {
-    data: ContentModels;
+    data: ContentArrays<ContentModels>;
   }
 
   interface ContentMethods {
+    /**
+     * Retrieve content
+     * @param keys An array of the keys of the content to retrieve
+     * @param params Optional params
+     * @example
+     * interface Content1 { ... }
+     * interface Content2 { ... }
+     * retrieve<{ key1: Content1, key2: Content2 }>(['key1', 'key2'])
+     */
     retrieve<ContentModels extends object = object>(
       keys: Array<keyof ContentModels>,
       params?: ContentParams<
         FlattenContentModels<ContentModelTopLevelValues<ContentModels>>
       >
-    ): Promise<Response<ContentResponse<ContentArrays<ContentModels>>>>;
+    ): Promise<Response<ContentResponse<ContentModels>>>;
   }
 }
 
