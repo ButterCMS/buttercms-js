@@ -1,5 +1,9 @@
 import { AxiosInstance } from "axios";
 
+////////////////////////////
+// Internal utility types //
+////////////////////////////
+
 type FlatValue<Type, Key> = Key extends `${infer I}.${infer J}`
   ? I extends keyof Type
     ? FlatValue<NonNullable<Type[I]>, J>
@@ -24,12 +28,27 @@ type WithFieldsPrefix<Type extends object> = {
     : never]?: FlatValue<NonNullable<Type>, Key>;
 };
 
-// Creates a type where the CollectionModel keys are also prefixed with "-" for a decreasing order
-type OrderParam<CollectionModel> = {
-  [Key in keyof CollectionModel as Key extends string
+// Creates a type where the ContentModel keys are also prefixed with "-" for a decreasing order
+type OrderParam<ContentModel extends object> = {
+  [Key in keyof ContentModel as Key extends string
     ? `${"-" | ""}${Key}`
-    : never]: CollectionModel[Key];
+    : never]: ContentModel[Key];
 };
+
+type ContentArrays<ContentModels extends object> = {
+  [Key in keyof ContentModels as Key extends string ? Key : never]: Array<
+    ContentModels[Key]
+  >;
+};
+
+type ContentModelTopLevelValues<T extends object = object> =
+  T[keyof T] extends object ? T[keyof T] : never;
+
+type FlattenContentModels<U extends object> = (
+  U extends any ? (k: U) => void : never
+) extends (k: infer I extends object) => void
+  ? I
+  : never;
 
 export namespace Butter {
   ///////////////////
@@ -352,11 +371,17 @@ export namespace Butter {
       levels?: number;
     };
 
+  interface ContentResponse<ContentModels extends object = object> {
+    data: ContentModels;
+  }
+
   interface ContentMethods {
-    retrieve(
-      keys: Array<string>,
-      params?: ContentParams
-    ): Promise<Response<object>>;
+    retrieve<ContentModels extends object = object>(
+      keys: Array<keyof ContentModels>,
+      params?: ContentParams<
+        FlattenContentModels<ContentModelTopLevelValues<ContentModels>>
+      >
+    ): Promise<Response<ContentResponse<ContentArrays<ContentModels>>>>;
   }
 }
 
