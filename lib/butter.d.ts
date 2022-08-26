@@ -476,6 +476,7 @@ export namespace Butter {
     };
 
   interface ContentResponse<ContentModels extends object = object> {
+    meta: Meta;
     data: ContentArrays<ContentModels>;
   }
 
@@ -490,7 +491,7 @@ export namespace Butter {
      * retrieve<{ key1: Content1, key2: Content2 }>(['key1', 'key2'])
      */
     retrieve<ContentModels extends object = object>(
-      keys: Array<keyof ContentModels>,
+      keys: Array<keyof ContentModels | string>,
       params?: ContentParams<
         FlattenContentModels<ContentModelTopLevelValues<ContentModels>>
       >
