@@ -37,7 +37,7 @@ type OrderParam<ContentModel extends object> = {
 
 type ContentArrays<ContentModels extends object> = {
   [Key in keyof ContentModels as Key extends string ? Key : never]: Array<
-    ContentModels[Key]
+    ContentModels[Key] & { meta: { id: number } }
   >;
 };
 
