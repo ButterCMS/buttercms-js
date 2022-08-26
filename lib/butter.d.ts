@@ -491,7 +491,7 @@ export namespace Butter {
      * retrieve<{ key1: Content1, key2: Content2 }>(['key1', 'key2'])
      */
     retrieve<ContentModels extends object = object>(
-      keys: Array<keyof ContentModels | string>,
+      keys: Array<keyof ContentModels>,
       params?: ContentParams<
         FlattenContentModels<ContentModelTopLevelValues<ContentModels>>
       >
