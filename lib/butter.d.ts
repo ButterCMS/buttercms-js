@@ -75,17 +75,68 @@ export namespace Butter {
     page_size?: number;
   }
 
+  interface Post<
+    AuthorSlug extends string = string,
+    PostSlug extends string = string
+  > {
+    status: "published" | "draft";
+    created: Date;
+    updated: Date;
+    published: Date;
+    title: string;
+    slug: PostSlug;
+    summary: string;
+    seo_title: string;
+    meta_description: string;
+    featured_image: string;
+    featured_image_alt: string;
+    url: string;
+    author: Omit<Author<AuthorSlug>, "recent_posts">;
+    tags: Tag[];
+    categories: Category[];
+    body?: string;
+  }
+
+  interface PostRetrieveResponse<
+    AuthorSlug extends string = string,
+    PostSlug extends string = string
+  > extends Response {
+    data: {
+      data: Post<AuthorSlug, PostSlug>;
+    };
+  }
+
+  interface PostListResponse<
+    AuthorSlug extends string = string,
+    PostSlug extends string = string
+  > extends Response {
+    data: {
+      meta: Meta;
+      data: Post<AuthorSlug, PostSlug>[];
+    };
+  }
+
+  interface PostSearchResponse extends Response {
+    data: {
+      meta: Meta;
+      data: Post[];
+    };
+  }
+
   interface PostMethods {
-    retrieve<ArticleSlug extends string = string>(
-      slug: ArticleSlug,
+    retrieve<PostSlug extends string = string>(
+      slug: PostSlug,
       params?: PostRetrieveParams
-    ): Promise<Response>;
+    ): Promise<PostRetrieveResponse<string, PostSlug>>;
 
     list<AuthorSlug extends string = string>(
       params?: PostListParams<AuthorSlug>
-    ): Promise<Response>;
+    ): Promise<PostListResponse<AuthorSlug>>;
 
-    search(query: string, params?: PostSearchParams): Promise<Response>;
+    search(
+      query: string,
+      params?: PostSearchParams
+    ): Promise<PostSearchResponse>;
   }
 
   //////////////
@@ -99,24 +150,22 @@ export namespace Butter {
     include?: "recent_posts";
   }
 
+  interface Category<CategorySlug extends string = string> {
+    name: string;
+    slug: CategorySlug;
+    recent_posts?: Post[];
+  }
+
   interface CategoryRetrieveResponse<CategorySlug extends string = string>
     extends Response {
     data: {
-      data: {
-        name: string;
-        slug: CategorySlug;
-        recent_posts?: Record<string, any>[];
-      };
+      data: Category<CategorySlug>;
     };
   }
 
   interface CategoryListResponse extends Response {
     data: {
-      data: {
-        name: string;
-        slug: string;
-        recent_posts?: Record<string, any>[];
-      }[];
+      data: Category[];
     };
   }
 
@@ -143,18 +192,19 @@ export namespace Butter {
   interface Tag<TagSlug extends string = string> {
     name: string;
     slug: TagSlug;
-    recent_posts?: Record<string, any>[];
+    recent_posts?: Post[];
   }
 
-  interface TagRetrieveResponse<TagSlug extends string = string> {
+  interface TagRetrieveResponse<TagSlug extends string = string>
+    extends Response {
     data: {
       data: Tag<TagSlug>;
     };
   }
 
-  interface TagListResponse<TagSlug extends string = string> {
+  interface TagListResponse extends Response {
     data: {
-      data: Tag<TagSlug>[];
+      data: Tag[];
     };
   }
 
@@ -191,7 +241,7 @@ export namespace Butter {
     instagram_url: `https://www.instagram.com/${string}`;
     twitter_handle: string;
     profile_image: `https://cdn.buttercms.com/${string}`;
-    recent_posts: Record<string, any>[];
+    recent_posts?: Post[];
   }
 
   interface AuthorRetrieveResponse<AuthorSlug extends string = string>
