@@ -41,8 +41,9 @@ export namespace Butter {
     previous_page: number | null;
     count: number;
   }
-  interface Response {
-    data?: any;
+
+  interface Response<Data extends object> {
+    data?: Data;
     status?: number;
     statusText?: string;
     headers?: Record<string, any>;
@@ -100,43 +101,37 @@ export namespace Butter {
   interface PostRetrieveResponse<
     AuthorSlug extends string = string,
     PostSlug extends string = string
-  > extends Response {
-    data: {
-      data: Post<AuthorSlug, PostSlug>;
-    };
+  > {
+    data: Post<AuthorSlug, PostSlug>;
   }
 
   interface PostListResponse<
     AuthorSlug extends string = string,
     PostSlug extends string = string
-  > extends Response {
-    data: {
-      meta: Meta;
-      data: Post<AuthorSlug, PostSlug>[];
-    };
+  > {
+    meta: Meta;
+    data: Post<AuthorSlug, PostSlug>[];
   }
 
-  interface PostSearchResponse extends Response {
-    data: {
-      meta: Meta;
-      data: Post[];
-    };
+  interface PostSearchResponse {
+    meta: Meta;
+    data: Post[];
   }
 
   interface PostMethods {
     retrieve<PostSlug extends string = string>(
       slug: PostSlug,
       params?: PostRetrieveParams
-    ): Promise<PostRetrieveResponse<string, PostSlug>>;
+    ): Promise<Response<PostRetrieveResponse<string, PostSlug>>>;
 
     list<AuthorSlug extends string = string>(
       params?: PostListParams<AuthorSlug>
-    ): Promise<PostListResponse<AuthorSlug>>;
+    ): Promise<Response<PostListResponse<AuthorSlug>>>;
 
     search(
       query: string,
       params?: PostSearchParams
-    ): Promise<PostSearchResponse>;
+    ): Promise<Response<PostSearchResponse>>;
   }
 
   //////////////
@@ -156,26 +151,21 @@ export namespace Butter {
     recent_posts?: Post[];
   }
 
-  interface CategoryRetrieveResponse<CategorySlug extends string = string>
-    extends Response {
-    data: {
-      data: Category<CategorySlug>;
-    };
+  interface CategoryRetrieveResponse<CategorySlug extends string = string> {
+    data: Category<CategorySlug>;
   }
 
-  interface CategoryListResponse extends Response {
-    data: {
-      data: Category[];
-    };
+  interface CategoryListResponse {
+    data: Category[];
   }
 
   interface CategoryMethods {
     retrieve<CategorySlug extends string = string>(
       slug: CategorySlug,
       params?: CategoryParams
-    ): Promise<CategoryRetrieveResponse<CategorySlug>>;
+    ): Promise<Response<CategoryRetrieveResponse<CategorySlug>>>;
 
-    list(params?: CategoryParams): Promise<CategoryListResponse>;
+    list(params?: CategoryParams): Promise<Response<CategoryListResponse>>;
   }
 
   /////////
@@ -195,26 +185,21 @@ export namespace Butter {
     recent_posts?: Post[];
   }
 
-  interface TagRetrieveResponse<TagSlug extends string = string>
-    extends Response {
-    data: {
-      data: Tag<TagSlug>;
-    };
+  interface TagRetrieveResponse<TagSlug extends string = string> {
+    data: Tag<TagSlug>;
   }
 
-  interface TagListResponse extends Response {
-    data: {
-      data: Tag[];
-    };
+  interface TagListResponse {
+    data: Tag[];
   }
 
   interface TagMethods {
     retrieve<TagSlug extends string = string>(
       slug: TagSlug,
       params?: TagParams
-    ): Promise<TagRetrieveResponse<TagSlug>>;
+    ): Promise<Response<TagRetrieveResponse<TagSlug>>>;
 
-    list(params?: TagParams): Promise<TagListResponse>;
+    list(params?: TagParams): Promise<Response<TagListResponse>>;
   }
 
   ////////////
@@ -244,30 +229,25 @@ export namespace Butter {
     recent_posts?: Post[];
   }
 
-  interface AuthorRetrieveResponse<AuthorSlug extends string = string>
-    extends Response {
-    data: {
-      data: Author<AuthorSlug>;
-    };
+  interface AuthorRetrieveResponse<AuthorSlug extends string = string> {
+    data: Author<AuthorSlug>;
   }
 
-  interface AuthorListResponse extends Response {
-    data: {
-      data: Author[];
-    };
+  interface AuthorListResponse {
+    data: Author[];
   }
 
   interface AuthorMethods {
     retrieve<AuthorSlug extends string = string>(
       slug: string,
       params?: AuthorParams
-    ): Promise<AuthorRetrieveResponse<AuthorSlug>>;
+    ): Promise<Response<AuthorRetrieveResponse<AuthorSlug>>>;
 
-    list(params?: AuthorParams): Promise<AuthorListResponse>;
+    list(params?: AuthorParams): Promise<Response<AuthorListResponse>>;
   }
 
   interface FeedMethods {
-    retrieve(slug: string, params?: any): Promise<Response>;
+    retrieve(slug: string, params?: any): Promise<Response<object>>;
   }
 
   //////////
@@ -313,30 +293,24 @@ export namespace Butter {
     PageModel extends object = object,
     PageType extends string = string,
     PageSlug extends string = string
-  > extends Response {
-    data: {
-      data: Page<PageModel, PageType, PageSlug>;
-    };
+  > {
+    data: Page<PageModel, PageType, PageSlug>;
   }
 
   interface PageListResponse<
     PageModel extends object = object,
     PageType extends string = string
-  > extends Response {
-    data: {
-      meta: Meta;
-      data: Page<PageModel, PageType>[];
-    };
+  > {
+    meta: Meta;
+    data: Page<PageModel, PageType>[];
   }
 
   interface PageSearchResponse<
     PageModel extends object = object,
     PageType extends string = string
-  > extends Response {
-    data: {
-      meta: Meta;
-      data: Page<PageModel, PageType>[];
-    };
+  > {
+    meta: Meta;
+    data: Page<PageModel, PageType>[];
   }
 
   interface PageMethods {
@@ -348,17 +322,17 @@ export namespace Butter {
       page_type: PageType,
       page_slug: PageSlug,
       params?: PageRetrieveParams
-    ): Promise<PageRetrieveResponse<PageModel, PageType, PageSlug>>;
+    ): Promise<Response<PageRetrieveResponse<PageModel, PageType, PageSlug>>>;
 
     list<PageModel extends object = object, PageType extends string = string>(
       page_type: PageType,
       params?: PageListParams
-    ): Promise<PageListResponse<PageModel, PageType>>;
+    ): Promise<Response<PageListResponse<PageModel, PageType>>>;
 
     search<PageModel extends object = object, PageType extends string = string>(
       query: string,
       params?: PageSearchParams<PageType>
-    ): Promise<PageSearchResponse<PageModel, PageType>>;
+    ): Promise<Response<PageSearchResponse<PageModel, PageType>>>;
   }
 
   /////////////
@@ -379,7 +353,10 @@ export namespace Butter {
     };
 
   interface ContentMethods {
-    retrieve(keys: Array<string>, params?: ContentParams): Promise<Response>;
+    retrieve(
+      keys: Array<string>,
+      params?: ContentParams
+    ): Promise<Response<object>>;
   }
 }
 
