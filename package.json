@@ -29,6 +29,6 @@
   "license": "MIT",
   "devDependencies": {
     "uglify-js": "^2.8.22",
-    "webpack": "^2.5.0"
+    "webpack": "^5.74.0"
   }
 }
