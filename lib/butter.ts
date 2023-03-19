@@ -1,64 +1,51 @@
 import type {
-  PostMethods,
-  PostListParams,
-  PostListResponse,
-  PostRetrieveParams,
-  PostRetrieveResponse,
-  PostSearchParams,
-  PostSearchResponse,
-  CategoryMethods
+  AuthorMethods,
+  CategoryMethods,
+  FeedMethods,
+  TagMethods,
+  PageMethods,
+  PostMethods
 } from './butter.d'
-
-import { API } from './utilities/api'
 
 import type { GlobalConfig } from './typescript/GlobalApiConfig'
 
-export default class Butter {
-  #apiToken: string;
-  #testMode: boolean;
-  #timeout: number;
-  #globalConfig: GlobalConfig
-  // resource APIs
-  post: PostMethods
-  category: CategoryMethods
-  tag: unknown
-  author: unknown
-  feed: unknown
-  content: unknown
-  page: unknown
+// wrapper for API calls
+import { APIWrapper } from './utilities/api'
 
-  constructor  (
-    apiToken: string,
-    testMode: boolean = false,
-    timeout: number = 3000,
-    globalConfig: GlobalConfig = { 
-      retries: 0
-    }
-  ) {
-    /* if no apiToken is passed throw error */
-    if (typeof apiToken !== 'string') {
+// resources
+import { Resource_Category } from './resources/Category'
+import { Resource_Author } from './resources/Author'
+import { Resource_Content } from './resources/Content'
+import { Resource_Feed } from './resources/Feed'
+import { Resource_Page } from './resources/Page'
+import { Resource_Post } from './resources/Posts'
+import { Resource_Tag } from './resources/Tag'
+
+export default class Butter {
+  #api: APIWrapper
+  // resource APIs
+  author: AuthorMethods
+  category: CategoryMethods
+  content: unknown
+  feed: FeedMethods
+  page: PageMethods
+  post: PostMethods
+  tag: TagMethods
+
+  constructor  (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalConfig = { retries: 0 }) {
+    /* if no token is passed throw error */
+    if (typeof token !== 'string') {
       throw 'ButterCMS API token not set';
     }
 
-    this.#apiToken = apiToken
-    this.#testMode = testMode
-    this.#timeout = timeout
-    this.#globalConfig = globalConfig
+    this.#api = new APIWrapper(token, testMode, timeout, config)
 
-    this.post = {
-      list: async <AuthorSlug extends string = string>(
-        params?: PostListParams<AuthorSlug>
-      ) => await new API('posts', this.#apiToken, this.#testMode, this.#timeout, this.#globalConfig).get<PostListResponse<AuthorSlug>>('', params),
-
-      retrieve: async <PostSlug extends string = string>(
-        slug: PostSlug,
-        params?: PostRetrieveParams
-      ) => await new API('posts', this.#apiToken, this.#testMode, this.#timeout, this.#globalConfig).get<PostRetrieveResponse<string, PostSlug>>(slug, params),
-
-      search: async (
-        query: string,
-        params?: PostSearchParams
-      ) => await new API('posts/search', this.#apiToken, this.#testMode, this.#timeout, this.#globalConfig).get<PostSearchResponse>(query, params)
-    }
+    this.author = new Resource_Author(this.#api)
+    this.category = new Resource_Category(this.#api)
+    this.content = new Resource_Content(this.#api)
+    this.feed = new Resource_Feed(this.#api)
+    this.page = new Resource_Page(this.#api)
+    this.post = new Resource_Post(this.#api)
+    this.tag = new Resource_Tag(this.#api)
   }
 }

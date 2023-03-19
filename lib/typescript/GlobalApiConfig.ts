@@ -1,3 +1,4 @@
 export interface GlobalConfig {
-  retries: number
+  retries: number,
+  headers?: HeadersInit
 }

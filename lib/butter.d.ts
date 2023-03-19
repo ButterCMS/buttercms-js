@@ -41,10 +41,10 @@ type ContentArrays<ContentModels extends object> = {
   >;
 };
 
-type ContentModelTopLevelValues<T extends object = object> =
+export type ContentModelTopLevelValues<T extends object = object> =
   T[keyof T] extends object ? T[keyof T] : never;
 
-type FlattenContentModels<U extends object> = (
+export type FlattenContentModels<U extends object> = (
   U extends any ? (k: U) => void : never
 ) extends (k: infer I extends object) => void
   ? I
@@ -205,7 +205,7 @@ type FlattenContentModels<U extends object> = (
     retrieve<CategorySlug extends string = string>(
       slug: CategorySlug,
       params?: CategoryParams
-    ): Promise<Response<CategoryRetrieveResponse<CategorySlug>>>;
+    ): Promise<CategoryRetrieveResponse<CategorySlug>>;
 
     /**
      * Get all categories
@@ -213,14 +213,14 @@ type FlattenContentModels<U extends object> = (
      * @example
      * list()
      */
-    list(params?: CategoryParams): Promise<Response<CategoryListResponse>>;
+    list(params?: CategoryParams): Promise<CategoryListResponse>;
   }
 
   /////////
   // Tag //
   /////////
 
-  interface TagParams {
+  export interface TagParams {
     /**
      * Get 10 most recent posts of this tag
      */
@@ -233,15 +233,15 @@ type FlattenContentModels<U extends object> = (
     recent_posts?: Post[];
   }
 
-  interface TagRetrieveResponse<TagSlug extends string = string> {
+  export interface TagRetrieveResponse<TagSlug extends string = string> {
     data: Tag<TagSlug>;
   }
 
-  interface TagListResponse {
+  export interface TagListResponse {
     data: Tag[];
   }
 
-  interface TagMethods {
+  export interface TagMethods {
     /**
      * Retrieve a tag
      * @param slug The tag's slug
@@ -252,7 +252,7 @@ type FlattenContentModels<U extends object> = (
     retrieve<TagSlug extends string = string>(
       slug: TagSlug,
       params?: TagParams
-    ): Promise<Response<TagRetrieveResponse<TagSlug>>>;
+    ): Promise<TagRetrieveResponse<TagSlug>>;
 
     /**
      * Get all tags
@@ -260,7 +260,7 @@ type FlattenContentModels<U extends object> = (
      * @example
      * list()
      */
-    list(params?: TagParams): Promise<Response<TagListResponse>>;
+    list(params?: TagParams): Promise<TagListResponse>;
   }
 
   ////////////
@@ -290,15 +290,15 @@ type FlattenContentModels<U extends object> = (
     recent_posts?: Post[];
   }
 
-  interface AuthorRetrieveResponse<AuthorSlug extends string = string> {
+  export interface AuthorRetrieveResponse<AuthorSlug extends string = string> {
     data: Author<AuthorSlug>;
   }
 
-  interface AuthorListResponse {
+  export interface AuthorListResponse {
     data: Author[];
   }
 
-  interface AuthorMethods {
+  export interface AuthorMethods {
     /**
      * Retrieve an author
      * @param slug The author's slug
@@ -309,7 +309,7 @@ type FlattenContentModels<U extends object> = (
     retrieve<AuthorSlug extends string = string>(
       slug: string,
       params?: AuthorParams
-    ): Promise<Response<AuthorRetrieveResponse<AuthorSlug>>>;
+    ): Promise<AuthorRetrieveResponse<AuthorSlug>>;
 
     /**
      * Get a list of authors
@@ -317,21 +317,21 @@ type FlattenContentModels<U extends object> = (
      * @example
      * list()
      */
-    list(params?: AuthorParams): Promise<Response<AuthorListResponse>>;
+    list(params?: AuthorParams): Promise<AuthorListResponse>;
   }
 
   //////////
   // Feed //
   //////////
 
-  type FeedTypes = "atom" | "rss" | "sitemap";
+  export type FeedTypes = "atom" | "rss" | "sitemap";
 
-  interface FeedParams {
+  export interface FeedParams {
     category_slug?: string;
     tag_slug?: string;
   }
 
-  interface FeedMethods {
+  export interface FeedMethods {
     /**
      * Get a feed
      * @param feedType The type of feed
@@ -344,19 +344,19 @@ type FlattenContentModels<U extends object> = (
     retrieve(
       feedType: FeedTypes,
       params?: FeedParams
-    ): Promise<Response<string>>;
+    ): Promise<string>;
   }
 
   //////////
   // Page //
   //////////
 
-  interface PageRetrieveParams {
+  export interface PageRetrieveParams {
     preview?: 0 | 1;
     levels?: number;
   }
 
-  type PageListParams<PageModel extends object = object> =
+  export type PageListParams<PageModel extends object = object> =
     WithFieldsPrefix<PageModel> & {
       preview?: 0 | 1;
       levels?: number;
@@ -365,7 +365,7 @@ type FlattenContentModels<U extends object> = (
       page_size?: number;
     };
 
-  interface PageSearchParams<PageType extends string = string> {
+  export interface PageSearchParams<PageType extends string = string> {
     page_type?: PageType;
     locale?: string;
     levels?: number;
@@ -386,7 +386,7 @@ type FlattenContentModels<U extends object> = (
     fields: PageModel;
   }
 
-  interface PageRetrieveResponse<
+  export interface PageRetrieveResponse<
     PageModel extends object = object,
     PageType extends string = string,
     PageSlug extends string = string
@@ -394,7 +394,7 @@ type FlattenContentModels<U extends object> = (
     data: Page<PageModel, PageType, PageSlug>;
   }
 
-  interface PageListResponse<
+  export interface PageListResponse<
     PageModel extends object = object,
     PageType extends string = string
   > {
@@ -402,7 +402,7 @@ type FlattenContentModels<U extends object> = (
     data: Page<PageModel, PageType>[];
   }
 
-  interface PageSearchResponse<
+  export interface PageSearchResponse<
     PageModel extends object = object,
     PageType extends string = string
   > {
@@ -410,7 +410,7 @@ type FlattenContentModels<U extends object> = (
     data: Page<PageModel, PageType>[];
   }
 
-  interface PageMethods {
+  export interface PageMethods {
     /**
      * Retrieve a single page
      * @param page_type The page type
@@ -428,7 +428,7 @@ type FlattenContentModels<U extends object> = (
       page_type: PageType,
       page_slug: PageSlug,
       params?: PageRetrieveParams
-    ): Promise<Response<PageRetrieveResponse<PageModel, PageType, PageSlug>>>;
+    ): Promise<PageRetrieveResponse<PageModel, PageType, PageSlug>>;
 
     /**
      * Get multiple pages of the same page type
@@ -441,7 +441,7 @@ type FlattenContentModels<U extends object> = (
     list<PageModel extends object = object, PageType extends string = string>(
       page_type: PageType,
       params?: PageListParams
-    ): Promise<Response<PageListResponse<PageModel, PageType>>>;
+    ): Promise<PageListResponse<PageModel, PageType>>;
 
     /**
      * Search pages based on a query
@@ -458,14 +458,14 @@ type FlattenContentModels<U extends object> = (
     search<PageModel extends object = object, PageType extends string = string>(
       query: string,
       params?: PageSearchParams<PageType>
-    ): Promise<Response<PageSearchResponse<PageModel, PageType>>>;
+    ): Promise<PageSearchResponse<PageModel, PageType>>;
   }
 
   /////////////
   // Content //
   /////////////
 
-  type ContentParams<ContentModel extends object = object> =
+  export type ContentParams<ContentModel extends object = object> =
     WithFieldsPrefix<ContentModel> & {
       test?: 0 | 1;
       order?: keyof OrderParam<ContentModel>;
@@ -474,12 +474,12 @@ type FlattenContentModels<U extends object> = (
       levels?: number;
     };
 
-  interface ContentResponse<ContentModels extends object = object> {
+  export interface ContentResponse<ContentModels extends object = object> {
     meta: Meta;
     data: ContentArrays<ContentModels>;
   }
 
-  interface ContentMethods {
+  export interface ContentMethods {
     /**
      * Retrieve content
      * @param keys An array of the keys of the content to retrieve
@@ -494,7 +494,7 @@ type FlattenContentModels<U extends object> = (
       params?: ContentParams<
         FlattenContentModels<ContentModelTopLevelValues<ContentModels>>
       >
-    ): Promise<Response<ContentResponse<ContentModels>>>;
+    ): Promise<ContentResponse<ContentModels>>;
   }
 
 

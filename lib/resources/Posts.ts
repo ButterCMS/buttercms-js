@@ -1,28 +1,30 @@
+import type { APIWrapper } from "../utilities/api"
+
 import type {
-  PostMethods,
   PostListParams,
   PostListResponse,
   PostRetrieveParams,
   PostRetrieveResponse,
   PostSearchParams,
   PostSearchResponse,
-  CategoryMethods
 } from '../butter.d'
 
-import { API } from '../utilities/api'
-import { Base } from '../utilities/shared'
-export class Post extends Base {
-  url: string = 'posts'
+export class Resource_Post {
+  api: APIWrapper
 
-  constructor (url) {
-    super()
-  
-    if (url) {
-      this.url = `posts/${url}`
-    }
+  constructor (api: APIWrapper) {
+    this.api = api
   }
 
-  async list<AuthorSlug extends string = string>(params?: PostListParams<AuthorSlug>) {
-    return await new API(this.url, this.#apiToken, this.#testMode, this.#timeout, this.#globalConfig).get<PostListResponse<AuthorSlug>>('', params),
+  async list <AuthorSlug extends string = string> (params?: PostListParams<AuthorSlug>) {
+    return this.api.get<PostListResponse<AuthorSlug>>('posts', params)
+  }
+
+  async retrieve <PostSlug extends string = string> (slug: PostSlug, params?: PostRetrieveParams) {
+    return this.api.get<PostRetrieveResponse<string, PostSlug>>(`posts/${slug}`, params)
+  }
+
+  async search (query: string, params?: PostSearchParams) {
+    return this.api.get<PostSearchResponse>(`posts/${query}`, params)
   }
 }
