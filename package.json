@@ -13,6 +13,7 @@
     "node": ">=0.10.32"
   },
   "scripts": {
+    "build": "rollup -c",
     "test": "ts-node test"
   },
   "homepage": "https://github.com/buttercms/buttercms-js",
@@ -21,10 +22,12 @@
     "type": "git",
     "url": "git://github.com/buttercms/buttercms-js.git"
   },
+  "type": "module",
   "main": "lib/butter.js",
   "types": "lib/butter.d.ts",
   "license": "MIT",
   "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.0",
     "@types/node": "^18.15.3",
     "esbuild": "^0.17.12",
     "rollup": "^3.19.1",

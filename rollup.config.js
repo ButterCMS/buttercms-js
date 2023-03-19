@@ -1,23 +1,23 @@
 import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
+import terser from "@rollup/plugin-terser";
 
 const bundle = (config) => ({
 	...config,
-	input: "src/index.ts",
-	external: ["@storybook/vue3"],
+	input: "lib/butter.ts",
 });
 
 export default [
 	bundle({
-		plugins: [esbuild()],
+		plugins: [terser(), esbuild()],
 		output: [
 			{
-				file: "dist/index.js",
+				file: "dist2/butter.js",
 				format: "cjs",
 				sourcemap: true,
 			},
 			{
-				file: "dist/index.mjs",
+				file: "dist2/butter.mjs",
 				format: "es",
 				sourcemap: true,
 			},
@@ -26,7 +26,7 @@ export default [
 	bundle({
 		plugins: [dts()],
 		output: {
-			file: "dist/index.d.ts",
+			file: "dist2/butter.d.ts",
 			format: "es",
 		},
 	}),
