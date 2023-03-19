@@ -13,7 +13,7 @@
     "node": ">=0.10.32"
   },
   "scripts": {
-    "build": "webpack && uglifyjs ./dist/butter.js -c -m -o ./dist/butter.min.js"
+    "test": "ts-node test"
   },
   "homepage": "https://github.com/buttercms/buttercms-js",
   "author": "ButterCMS <support@buttercms.com>",
@@ -23,13 +23,15 @@
   },
   "main": "lib/butter.js",
   "types": "lib/butter.d.ts",
-  "dependencies": {
-    "axios": "^1.2.5"
-  },
   "license": "MIT",
   "devDependencies": {
-    "uglify-js": "^3.17.4",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1"
+    "@types/node": "^18.15.3",
+    "esbuild": "^0.17.12",
+    "rollup": "^3.19.1",
+    "rollup-plugin-dts": "^5.3.0",
+    "rollup-plugin-esbuild": "^5.0.0",
+    "rome": "^11.0.0",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
   }
 }

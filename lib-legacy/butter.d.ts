@@ -50,17 +50,18 @@ type FlattenContentModels<U extends object> = (
   ? I
   : never;
 
+export namespace Butter {
   ///////////////////
   // Utility types //
   ///////////////////
 
-  export interface Meta {
+  interface Meta {
     next_page: number | null;
     previous_page: number | null;
     count: number;
   }
 
-  export interface Response<Data extends object | string = any> {
+  interface Response<Data extends object | string = any> {
     data?: Data;
     status?: number;
     statusText?: string;
@@ -72,11 +73,11 @@ type FlattenContentModels<U extends object> = (
   // Post //
   //////////
 
-  export interface PostRetrieveParams {
+  interface PostRetrieveParams {
     preview?: 1 | 0;
   }
 
-  export interface PostListParams<AuthorSlug extends string = string> {
+  interface PostListParams<AuthorSlug extends string = string> {
     preview?: 1 | 0;
     exclude_body?: boolean;
     page?: number;
@@ -86,12 +87,12 @@ type FlattenContentModels<U extends object> = (
     tag_slug?: string;
   }
 
-  export interface PostSearchParams {
+  interface PostSearchParams {
     page?: number;
     page_size?: number;
   }
 
-  export interface Post<
+  interface Post<
     AuthorSlug extends string = string,
     PostSlug extends string = string
   > {
@@ -113,14 +114,14 @@ type FlattenContentModels<U extends object> = (
     body?: string;
   }
 
-  export interface PostRetrieveResponse<
+  interface PostRetrieveResponse<
     AuthorSlug extends string = string,
     PostSlug extends string = string
   > {
     data: Post<AuthorSlug, PostSlug>;
   }
 
-  export interface PostListResponse<
+  interface PostListResponse<
     AuthorSlug extends string = string,
     PostSlug extends string = string
   > {
@@ -128,12 +129,12 @@ type FlattenContentModels<U extends object> = (
     data: Post<AuthorSlug, PostSlug>[];
   }
 
-  export interface PostSearchResponse {
+  interface PostSearchResponse {
     meta: Meta;
     data: Post[];
   }
 
-  export interface PostMethods {
+  interface PostMethods {
     /**
      * Retrieve a post
      * @param slug The post's slug
@@ -144,7 +145,7 @@ type FlattenContentModels<U extends object> = (
     retrieve<PostSlug extends string = string>(
       slug: PostSlug,
       params?: PostRetrieveParams
-    ): Promise<PostRetrieveResponse<string, PostSlug>>;
+    ): Promise<Response<PostRetrieveResponse<string, PostSlug>>>;
 
     /**
      * Get a list of posts
@@ -154,7 +155,7 @@ type FlattenContentModels<U extends object> = (
      */
     list<AuthorSlug extends string = string>(
       params?: PostListParams<AuthorSlug>
-    ): Promise<PostListResponse<AuthorSlug>>;
+    ): Promise<Response<PostListResponse<AuthorSlug>>>;
 
     /**
      * Search posts based on a query
@@ -166,35 +167,35 @@ type FlattenContentModels<U extends object> = (
     search(
       query: string,
       params?: PostSearchParams
-    ): Promise<PostSearchResponse>;
+    ): Promise<Response<PostSearchResponse>>;
   }
 
   //////////////
   // Category //
   //////////////
 
-  export interface CategoryParams {
+  interface CategoryParams {
     /**
      * Get 10 most recent posts of this category
      */
     include?: "recent_posts";
   }
 
-  export interface Category<CategorySlug extends string = string> {
+  interface Category<CategorySlug extends string = string> {
     name: string;
     slug: CategorySlug;
     recent_posts?: Post[];
   }
 
-  export interface CategoryRetrieveResponse<CategorySlug extends string = string> {
+  interface CategoryRetrieveResponse<CategorySlug extends string = string> {
     data: Category<CategorySlug>;
   }
 
-  export interface CategoryListResponse {
+  interface CategoryListResponse {
     data: Category[];
   }
 
-  export interface CategoryMethods {
+  interface CategoryMethods {
     /**
      * Retrieve a category
      * @param slug The category's slug
@@ -496,7 +497,7 @@ type FlattenContentModels<U extends object> = (
       >
     ): Promise<Response<ContentResponse<ContentModels>>>;
   }
-
+}
 
 export class ButterStatic {
   post: Butter.PostMethods;
