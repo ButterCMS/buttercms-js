@@ -4,4 +4,4 @@ export const BUTTER_BASE_HEADERS = {
 	"X-Butter-Client": `JS/${BUTTER_CLIENT_VERSION}`,
   // detect if library is called in server side
   'Accept-Encoding': typeof window === 'undefined' ? 'gzip' : ''
-};
+}
