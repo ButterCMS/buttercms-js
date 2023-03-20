@@ -14,7 +14,9 @@
   },
   "scripts": {
     "build": "rollup -c",
-    "test": "ts-node --esm ./test.ts"
+    "lint": "npx rome check lib --apply",
+    "test": "ts-node --esm ./test.ts",
+    "prepack": "npm run build"
   },
   "homepage": "https://github.com/buttercms/buttercms-js",
   "author": "ButterCMS <support@buttercms.com>",
