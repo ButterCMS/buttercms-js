@@ -10,7 +10,9 @@
     "headless cms"
   ],
   "engines": {
-    "node": ">=0.10.32"
+    "node": ">=18",
+    "npm": "Please use pnpm for package management",
+    "pnpm": ">=7"
   },
   "scripts": {
     "build": "rollup -c",
@@ -35,8 +37,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@rollup/plugin-commonjs": "^24.0.1",
-    "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-terser": "^0.4.0",
     "@types/isomorphic-fetch": "^0.0.36",
     "@types/node": "^18.15.3",
