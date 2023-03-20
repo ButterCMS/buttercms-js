@@ -7,7 +7,7 @@ import type {
   PostMethods
 } from './butter.d'
 
-import type { GlobalConfig } from './typescript/GlobalApiConfig'
+import type { GlobalButterConfig } from './typescript/GlobalButterConfig'
 
 // wrapper for API calls
 import { APIWrapper } from './utilities/api'
@@ -32,7 +32,7 @@ export default class Butter {
   post: PostMethods
   tag: TagMethods
 
-  constructor  (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalConfig = { retries: 1 }) {
+  constructor  (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalButterConfig = { retries: 1 }) {
     /* if no token is passed throw error */
     if (typeof token !== 'string') {
       throw 'ButterCMS API token not set';
