@@ -2,16 +2,16 @@
 import fetch from './retry'
 
 import { BUTTER_BASE_API_URL, BUTTER_BASE_HEADERS } from '../config'
-import type { GlobalConfig } from '../typescript/GlobalApiConfig'
+import type { GlobalButterConfig } from '../typescript/GlobalButterConfig'
 
 export class APIWrapper {
   #token: string;
   #testMode: boolean;
   #timeout: number;
-  #config: GlobalConfig
+  #config: GlobalButterConfig
   #baseURL = BUTTER_BASE_API_URL;
 
-  constructor (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalConfig) {
+  constructor (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalButterConfig) {
     this.#token = token
     this.#testMode = testMode
     this.#timeout = timeout
