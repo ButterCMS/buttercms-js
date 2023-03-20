@@ -1,4 +1,4 @@
-import { AxiosInstance } from "axios";
+import type { GlobalConfig } from './typescript/GlobalApiConfig'
 
 ////////////////////////////
 // Internal utility types //
@@ -498,7 +498,7 @@ export type FlattenContentModels<U extends object> = (
   }
 
 
-export class ButterStatic {
+export default class ButterStatic {
   post: Butter.PostMethods;
   category: Butter.CategoryMethods;
   tag: Butter.TagMethods;
@@ -510,15 +510,16 @@ export class ButterStatic {
     apiToken: string,
     testMode?: boolean,
     timeout?: number,
-    axiosHook?: (axios: AxiosInstance) => unknown
+    config?: GlobalConfig
   );
 }
-
+/*
 export const Butter: (
   apiToken: string,
   testMode?: boolean,
   timeout?: number,
-  axiosHook?: (axios: AxiosInstance) => unknown
+  config?: GlobalConfig
 ) => ButterStatic;
+*/
 
-export default Butter;
+export default ButterStatic;

@@ -2,32 +2,29 @@ import dts from "rollup-plugin-dts";
 import esbuild from "rollup-plugin-esbuild";
 import terser from "@rollup/plugin-terser";
 
-const bundle = (config) => ({
-	...config,
-	input: "lib/butter.ts",
-});
-
 export default [
-	bundle({
-		plugins: [terser(), esbuild()],
+	{
+		input: "lib/butter.ts",
+		plugins: [terser(), esbuild(/*{optimizeDeps: { include: ['isomorphic-fetch'] } }*/)],
 		output: [
 			{
-				file: "dist2/butter.js",
+				file: "dist/butter.js",
 				format: "cjs",
-				sourcemap: true,
+				sourcemap: true
 			},
 			{
-				file: "dist2/butter.mjs",
+				file: "dist/butter.mjs",
 				format: "es",
-				sourcemap: true,
+				sourcemap: true
 			},
-		],
-	}),
-	bundle({
+		]
+	},
+	{
+		input: "lib/butter.d.ts",
 		plugins: [dts()],
 		output: {
-			file: "dist2/butter.d.ts",
+			file: "dist/butter.d.ts",
 			format: "es",
 		},
-	}),
+	},
 ];

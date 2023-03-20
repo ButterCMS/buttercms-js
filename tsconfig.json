@@ -8,15 +8,12 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "lib": ["es2020", "dom"],
-    "module": "commonjs",
+    "module": "ES6",
+    "moduleResolution": "node",
     "noImplicitAny": true,
-    "paths": {
-      "~/*": ["src/*"],
-      "~dist/*": ["dist/*"]
-    },
-    "rootDir": "./src",
+    "rootDir": "./",
     "skipLibCheck": true,
-    "target": "esnext"
+    "target": "ES6",
   },
-  "include": ["src/**/*"]
+  "include": ["lib/**/*.ts"]
 }

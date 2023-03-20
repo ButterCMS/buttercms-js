@@ -32,7 +32,7 @@ export default class Butter {
   post: PostMethods
   tag: TagMethods
 
-  constructor  (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalConfig = { retries: 0 }) {
+  constructor  (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalConfig = { retries: 1 }) {
     /* if no token is passed throw error */
     if (typeof token !== 'string') {
       throw 'ButterCMS API token not set';

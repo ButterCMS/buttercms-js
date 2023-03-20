@@ -1,4 +1,6 @@
 
+import fetch from './retry'
+
 import { BUTTER_BASE_API_URL, BUTTER_BASE_HEADERS } from '../config'
 import type { GlobalConfig } from '../typescript/GlobalApiConfig'
 
@@ -31,10 +33,21 @@ export class APIWrapper {
   // rome-ignore lint/suspicious/noExplicitAny: <explanation>
   async get<T extends string | object> (url: string, params?: Record<string, any>): Promise<T> {
     const butterUrl = `${this.#baseURL}/${url}?${this.createParams(params)}`
+
+    if (typeof this.#config.beforeHook !== 'undefined') {
+      await this.#config.beforeHook(butterUrl, params)
+    }
+
     const response = await fetch(butterUrl, {
       headers: { ...BUTTER_BASE_HEADERS, ...this.#config.headers }
-    })
+    }, this.#config.retries)
 
-    return response.json()
-  } 
+    const json = await response.json()
+
+    if (typeof this.#config.afterHook !== 'undefined') {
+      await this.#config.afterHook(url, params, json)
+    }
+
+    return json
+  }
 }
