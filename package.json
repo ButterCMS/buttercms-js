@@ -16,7 +16,8 @@
     "build": "rollup -c",
     "lint": "pnpx rome check lib --apply",
     "test": "ts-node --esm ./test.ts",
-    "prepack": "pnpm build"
+    "prepack": "pnpm build",
+    "release": "pnpm build && auto shipit --dry-run"
   },
   "homepage": "https://github.com/buttercms/buttercms-js",
   "author": "ButterCMS <support@buttercms.com>",
@@ -49,6 +50,7 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
+    "auto": "^10.43.0",
     "isomorphic-unfetch": "^4.0.2"
   }
 }
