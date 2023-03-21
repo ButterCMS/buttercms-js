@@ -10,7 +10,7 @@
     "headless cms"
   ],
   "engines": {
-    "node": ">=18",
+    "node": ">=16",
     "npm": "Please use pnpm for package management",
     "pnpm": ">=7"
   },
