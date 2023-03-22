@@ -17,9 +17,10 @@
   "scripts": {
     "build": "rollup -c",
     "lint": "pnpx rome check lib --apply",
-    "test": "ts-node --esm ./test.ts",
+    "test:ts": "ts-node --esm ./test.ts",
     "prepack": "pnpm build",
-    "release": "pnpm build && auto shipit --dry-run"
+    "release": "pnpm build && auto shipit --dry-run",
+    "test": "pnpm jest"
   },
   "homepage": "https://github.com/buttercms/buttercms-js",
   "author": "ButterCMS <support@buttercms.com>",
@@ -37,15 +38,20 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@happy-dom/jest-environment": "^8.9.0",
     "@rollup/plugin-terser": "^0.4.0",
     "@types/isomorphic-fetch": "^0.0.36",
+    "@types/jest": "^29.5.0",
     "@types/node": "^18.15.3",
     "auto": "^10.43.0",
     "esbuild": "^0.17.12",
+    "jest": "^29.5.0",
+    "jest-fetch-mock": "^3.0.3",
     "rollup": "^3.19.1",
     "rollup-plugin-dts": "^5.3.0",
     "rollup-plugin-esbuild": "^5.0.0",
     "rome": "^11.0.0",
+    "ts-jest": "^29.0.5",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.2"
   },
