@@ -1,5 +1,4 @@
-import Butter from "buttercms";
-import type { PostListResponse, PostRetrieveResponse, PostSearchResponse } from "buttercms"
+import Butter from "../lib/butter";
 
 async function testing (apiToken: string) {
   // setup Butter class

@@ -10,7 +10,7 @@ import type {
 import type { GlobalButterConfig } from './typescript/GlobalButterConfig'
 
 // wrapper for API calls
-import { APIWrapper } from './utilities/api'
+import { APIWrapper } from './utilities/apiWrapper'
 
 // resources
 import { Resource_Category } from './resources/Category'

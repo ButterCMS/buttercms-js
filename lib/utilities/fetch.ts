@@ -1,8 +1,7 @@
-import isoFetch from 'isomorphic-unfetch'
+import fetch from 'isomorphic-unfetch'
 
 export default async function fetchRetry (url: string, requestConfig: RequestInit, retries = 3): Promise<Response> {
-  const response = await isoFetch(url, requestConfig)
-
+  const response = await fetch(url, requestConfig)
   if (response.ok) {
     return response
   }

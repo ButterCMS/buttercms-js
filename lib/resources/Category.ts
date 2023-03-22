@@ -1,4 +1,4 @@
-import type { APIWrapper } from "../utilities/api"
+import type { APIWrapper } from "../utilities/apiWrapper"
 
 import type {
   CategoryListResponse,
