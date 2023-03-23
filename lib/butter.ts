@@ -4,7 +4,8 @@ import type {
   FeedMethods,
   TagMethods,
   PageMethods,
-  PostMethods
+  PostMethods,
+  ContentMethods
 } from './butter.d'
 
 import type { GlobalButterConfig } from './typescript/GlobalButterConfig'
@@ -26,7 +27,7 @@ export default class Butter {
   // resource APIs
   author: AuthorMethods
   category: CategoryMethods
-  content: unknown
+  content: ContentMethods
   feed: FeedMethods
   page: PageMethods
   post: PostMethods
