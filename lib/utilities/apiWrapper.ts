@@ -42,7 +42,7 @@ export class APIWrapper {
       headers: { ...BUTTER_BASE_HEADERS, ...this.#config.headers }
     }, this.#config.retries)
 
-    const json = await response.json()
+    const json = await response?.json()
 
     if (typeof this.#config.afterHook !== 'undefined') {
       await this.#config.afterHook(url, params, json)
