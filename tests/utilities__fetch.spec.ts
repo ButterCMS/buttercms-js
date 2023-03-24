@@ -28,6 +28,17 @@ describe('fetch', () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
+  test.only('fail: one retry', async () => {
+    fetchMock.mockResponse('fail', {
+      headers: { 'content-type': 'text/plain; charset=UTF-8' },
+      status: 500,
+      statusText: 'Whoops!'
+    })
+
+    await fetch('https://example.co.uk', {}, 1)
+
+    expect(fetchMock).toHaveBeenCalledTimes(2)
+  })
   test('fail: three retries', async () => {
     fetchMock.mockResponse('fail', {
       headers: { 'content-type': 'text/plain; charset=UTF-8' },
