@@ -15,18 +15,23 @@ describe('APIWrapper', () => {
     fetchMock.resetMocks()
   })
 
-  test('createParams(): test mode - true', () => {
+  test('createParams(): preview mode - true', () => {
     const api = new APIWrapper('123', true, 2500, config)
-    expect(api.createParams()).toEqual('auth_token=123&test=1&preview=1')
+    expect(api.createParams()).toEqual('auth_token=123&preview=1')
   })
-  test('createParams(): test mode - false', () => {
+  test('createParams(): preview mode - false', () => {
     const api = new APIWrapper('123', false, 2500, config)
-    expect(api.createParams()).toEqual('auth_token=123&test=0&preview=0')
+    expect(api.createParams()).toEqual('auth_token=123&preview=0')
   })
   test('createParams(): custom params', () => {
     const api = new APIWrapper('123', false, 2500, config)
     const customParam = { custom: true }
-    expect(api.createParams(customParam)).toEqual('custom=true&auth_token=123&test=0&preview=0')
+    expect(api.createParams(customParam)).toEqual('auth_token=123&preview=0&custom=true')
+  })
+  test('createParams(): custom preview params will overwrite default preview mode', () => {
+    const api = new APIWrapper('123', false, 2500, config)
+    const customParam = { preview: true }
+    expect(api.createParams(customParam)).toEqual('auth_token=123&preview=1')
   })
 
   test('get() - calls expected URL with expected HEADERS', async () => {
@@ -36,7 +41,7 @@ describe('APIWrapper', () => {
 
     await api.get('test-path')
 
-    expect(fetchMock).toHaveBeenCalledWith(`${BUTTER_BASE_API_URL}/test-path?auth_token=123&test=0&preview=0`, {
+    expect(fetchMock).toHaveBeenCalledWith(`${BUTTER_BASE_API_URL}/test-path?auth_token=123&preview=0`, {
       headers: {
         ...BUTTER_BASE_HEADERS,
         ...config.headers

@@ -6,14 +6,14 @@ import type { GlobalButterConfig } from '../typescript/GlobalButterConfig'
 
 export class APIWrapper {
   #token: string;
-  #testMode: boolean;
+  #previewMode: boolean;
   #timeout: number;
   #config: GlobalButterConfig
   #baseURL = BUTTER_BASE_API_URL;
 
-  constructor (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalButterConfig) {
+  constructor (token: string, previewMode: boolean = false, timeout: number = 3000, config: GlobalButterConfig) {
     this.#token = token
-    this.#testMode = testMode
+    this.#previewMode = previewMode
     this.#timeout = timeout
     this.#config = config
   }
@@ -21,10 +21,14 @@ export class APIWrapper {
   // rome-ignore lint/suspicious/noExplicitAny: <explanation>
   createParams (_params?: Record<string, any>) {
     const params = {
-      ..._params,
       auth_token: this.#token,
-      test: this.#testMode ? '1' : '0',
-      preview: this.#testMode ? '1' : '0'
+      preview: this.#previewMode ? '1' : '0',
+      ..._params,
+    }
+
+    // convert true/false preview param to '1' / '0'
+    if (_params?.preview === true || _params?.preview === false) {
+      params.preview = _params.preview ? '1' : '0'
     }
 
     return new URLSearchParams(params).toString();
