@@ -15,6 +15,6 @@ export class Resource_Content {
   }
 
   async retrieve <ContentModels extends object = object> (keys: Array<keyof ContentModels>, params?: ContentParams<FlattenContentModels<ContentModelTopLevelValues<ContentModels>>>) {
-    return this.api.get<ContentResponse<ContentModels>>('content', { ...keys, ...params })
+    return this.api.get<ContentResponse<ContentModels>>('content', { keys: keys.join(), ...params })
   }
 }
