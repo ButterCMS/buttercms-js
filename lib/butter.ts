@@ -33,13 +33,13 @@ export default class Butter {
   post: PostMethods
   tag: TagMethods
 
-  constructor  (token: string, testMode: boolean = false, timeout: number = 3000, config: GlobalButterConfig = { retries: 1 }) {
+  constructor  (token: string, previewMode: boolean = false, timeout: number = 3000, config: GlobalButterConfig = { retries: 1 }) {
     /* if no token is passed throw error */
     if (typeof token !== 'string') {
       throw 'ButterCMS API token not set';
     }
 
-    this.#api = new APIWrapper(token, testMode, timeout, config)
+    this.#api = new APIWrapper(token, previewMode, timeout, config)
 
     this.author = new Resource_Author(this.#api)
     this.category = new Resource_Category(this.#api)

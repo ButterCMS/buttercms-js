@@ -460,7 +460,7 @@ export interface PageMethods {
 
 export type ContentParams<ContentModel extends object = object> =
   WithFieldsPrefix<ContentModel> & {
-    test?: 0 | 1;
+    previews?: 0 | 1;
     order?: keyof OrderParam<ContentModel>;
     page?: number;
     page_size?: number;
@@ -500,7 +500,7 @@ export default class Butter {
   content: ContentMethods;
   constructor(
     apiToken: string,
-    testMode?: boolean,
+    previewMode?: boolean,
     timeout?: number,
     config?: GlobalButterConfig
   );
