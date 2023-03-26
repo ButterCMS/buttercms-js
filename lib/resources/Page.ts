@@ -36,6 +36,6 @@ export class Resource_Page {
   }
 
   async search <PageModel extends object = object, PageType extends string = string> (query: string, params?: PageSearchParams<PageType>) {
-    return this.api.get<PageSearchResponse<PageModel, PageType>>('pages/search/', { ...params, query })
+    return this.api.get<PageSearchResponse<PageModel, PageType>>('pages/search', { ...params, query })
   }
 }

@@ -25,6 +25,6 @@ export class Resource_Post {
   }
 
   async search (query: string, params?: PostSearchParams) {
-    return this.api.get<PostSearchResponse>('posts/search/', { ...params, query })
+    return this.api.get<PostSearchResponse>('posts/search', { ...params, query })
   }
 }
