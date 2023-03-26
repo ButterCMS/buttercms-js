@@ -1,5 +1,4 @@
-// rome-ignore lint/suspicious/noExplicitAny: <explanation>
-type Hook = (url: string, params: Record<string, any> | undefined, responseJson?: JSON) => Promise<unknown>;
+export type Hook = (url: string, params: Record<string, unknown> | undefined, responseJson?: JSON) => Promise<unknown>;
 
 export interface GlobalButterConfig {
   retries?: number,
