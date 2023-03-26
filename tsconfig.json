@@ -14,6 +14,7 @@
     "rootDir": "./",
     "skipLibCheck": true,
     "target": "ES6",
+    "types": ["@types/node"]
   },
   "include": ["lib/**/*.ts"]
 }
