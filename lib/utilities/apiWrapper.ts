@@ -2,7 +2,7 @@
 import fetch from './fetch'
 
 import { BUTTER_BASE_API_URL, BUTTER_BASE_HEADERS } from '../config'
-import type { GlobalButterConfig } from '../typescript/GlobalButterConfig'
+import type { GlobalButterConfig } from '../types/GlobalButterConfig'
 
 export class APIWrapper {
   #token: string;

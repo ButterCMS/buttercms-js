@@ -8,7 +8,7 @@ import type {
   ContentMethods
 } from './butter.d'
 
-import type { GlobalButterConfig } from './typescript/GlobalButterConfig'
+import type { GlobalButterConfig } from './types/GlobalButterConfig'
 
 // wrapper for API calls
 import { APIWrapper } from './utilities/apiWrapper'

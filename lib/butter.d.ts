@@ -1,4 +1,4 @@
-import type { GlobalButterConfig } from './typescript/GlobalButterConfig'
+import type { GlobalButterConfig } from './types/GlobalButterConfig'
 
 ////////////////////////////
 // Internal utility types //
