@@ -11,7 +11,7 @@ const config: Config = {
   automock: false,
   resetMocks: false,
   setupFiles: [
-    "./jestSetup.ts"
+    "./jest.setup.ts"
   ]
 };
 
