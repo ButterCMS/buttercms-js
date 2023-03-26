@@ -14,7 +14,7 @@ describe('fetch', () => {
 
     expect(fetchMock).toHaveBeenCalledWith('https://example.co.uk', {})
   })
-  test.only('fail: zero retries', async () => {
+  test('fail: zero retries', async () => {
     fetchMock.mockResponse('fail', {
       status: 500
     })
