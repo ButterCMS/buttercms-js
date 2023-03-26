@@ -1,4 +1,4 @@
-import fetch from '../lib/utilities/fetch'
+import fetch from '../../lib/utilities/fetch'
 
 import fetchMock from 'jest-fetch-mock'
 

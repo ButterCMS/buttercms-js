@@ -31,12 +31,30 @@ export class APIWrapper {
       params.preview = _params.preview ? '1' : '0'
     }
 
-    return new URLSearchParams(params).toString();
+    return params
+  }
+  // rome-ignore lint/suspicious/noExplicitAny: <explanation>
+  createURL(base: string, path: string, params?: Record<string, any>) {
+    let url = `${base}/${path}`
+
+    if (params) {
+      // add param ?
+      url = `${url}?`
+      // add each param to the string
+      for (let param in params) {
+        url = `${url}${param}=${params[param]}&`
+      }
+      // remove trailing &
+      url = url.slice(0, -1)
+    }
+
+    return url
   }
 
   // rome-ignore lint/suspicious/noExplicitAny: <explanation>
   async get<T extends string | object> (url: string, params?: Record<string, any>): Promise<T> {
-    const butterUrl = `${this.#baseURL}/${url}?${this.createParams(params)}`
+    //const butterUrl = `${this.#baseURL}/${url}?${this.createParams(params)}`
+    const butterUrl = this.createURL(this.#baseURL, url, this.createParams(params))
 
     if (typeof this.#config.beforeHook !== 'undefined') {
       await this.#config.beforeHook(butterUrl, params)
@@ -49,7 +67,7 @@ export class APIWrapper {
     const json = await response?.json()
 
     if (typeof this.#config.afterHook !== 'undefined') {
-      await this.#config.afterHook(url, params, json)
+      await this.#config.afterHook(butterUrl, params, json)
     }
 
     return json
