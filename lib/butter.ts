@@ -14,8 +14,8 @@ import type { GlobalButterConfig } from './typescript/GlobalButterConfig'
 import { APIWrapper } from './utilities/apiWrapper'
 
 // resources
-import { Resource_Category } from './resources/Category'
 import { Resource_Author } from './resources/Author'
+import { Resource_Category } from './resources/Category'
 import { Resource_Content } from './resources/Content'
 import { Resource_Feed } from './resources/Feed'
 import { Resource_Page } from './resources/Page'
