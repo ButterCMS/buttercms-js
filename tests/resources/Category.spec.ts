@@ -1,6 +1,6 @@
-import { Resource_Category } from '../lib/resources/Category'
-import { APIWrapper } from '../lib/utilities/apiWrapper'
-import { BUTTER_BASE_API_URL } from '../lib/config'
+import { Resource_Category } from '../../lib/resources/Category'
+import { APIWrapper } from '../../lib/utilities/apiWrapper'
+import { BUTTER_BASE_API_URL } from '../../lib/config'
 
 import fetchMock from 'jest-fetch-mock'
 
