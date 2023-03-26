@@ -2,9 +2,6 @@ import fetch from '../lib/utilities/fetch'
 
 import fetchMock from 'jest-fetch-mock'
 
-// using spy to hide console logs from test output
-jest.spyOn(console,'log').mockReturnValue()
-
 describe('fetch', () => {
   beforeEach(() => {
     fetchMock.resetMocks()
@@ -17,22 +14,18 @@ describe('fetch', () => {
 
     expect(fetchMock).toHaveBeenCalledWith('https://example.co.uk', {})
   })
-  test('fail: zero retries', async () => {
+  test.only('fail: zero retries', async () => {
     fetchMock.mockResponse('fail', {
-      headers: { 'content-type': 'text/plain; charset=UTF-8' },
-      status: 500,
-      statusText: 'Whoops!'
+      status: 500
     })
 
     await fetch('https://example.co.uk', {}, 0)
 
     expect(fetchMock).toHaveBeenCalledTimes(1)
   })
-  test.only('fail: one retry', async () => {
+  test('fail: one retry', async () => {
     fetchMock.mockResponse('fail', {
-      headers: { 'content-type': 'text/plain; charset=UTF-8' },
-      status: 500,
-      statusText: 'Whoops!'
+      status: 500
     })
 
     await fetch('https://example.co.uk', {}, 1)
@@ -41,9 +34,7 @@ describe('fetch', () => {
   })
   test('fail: three retries', async () => {
     fetchMock.mockResponse('fail', {
-      headers: { 'content-type': 'text/plain; charset=UTF-8' },
-      status: 500,
-      statusText: 'Whoops!'
+      status: 500
     })
 
     await fetch('https://example.co.uk', {}, 3)
@@ -52,7 +43,7 @@ describe('fetch', () => {
   })
   test('fail: with one retry then success', async () => {
     fetchMock.mockResponses(
-      [ 'fail', { status: 500, statusText: 'Whoops!' } ],
+      [ 'fail', { status: 500 } ],
       [ 'success', { status: 200 } ]
     )
 

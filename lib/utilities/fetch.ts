@@ -7,11 +7,8 @@ export default async function fetchRetry (url: string, requestConfig: RequestIni
   }
 
   if (retries > 0) {
-    console.log(`Fetch failed with status ${response?.status}, trying again... (attempts remaining ${retries - 1})`)
     return fetchRetry(url, requestConfig, retries - 1)
   }
-
-  console.log(`Fetch failed with status ${response?.status}, giving up.`)
 
   return response
 }
