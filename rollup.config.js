@@ -5,7 +5,7 @@ import terser from "@rollup/plugin-terser";
 export default [
 	{
 		input: "lib/butter.ts",
-		plugins: [terser(), esbuild(/*{optimizeDeps: { include: ['isomorphic-fetch'] } }*/)],
+		plugins: [terser(), esbuild()],
 		output: [
 			{
 				file: "dist/butter.js",
