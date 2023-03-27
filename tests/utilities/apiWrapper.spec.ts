@@ -15,28 +15,27 @@ describe('APIWrapper', () => {
     fetchMock.resetMocks()
   })
 
-  test('createParams(): preview mode - true', () => {
+  test('mergeParams(): preview mode - true', () => {
     const api = new APIWrapper('123', true, 2500, config)
-    expect(api.createParams()).toEqual({ auth_token: "123", preview: "1" })
+    expect(api.mergeParams()).toEqual({ auth_token: "123", preview: "1" })
   })
-  test('createParams(): preview mode - false', () => {
+  test('mergeParams(): preview mode - false', () => {
     const api = new APIWrapper('123', false, 2500, config)
-    expect(api.createParams()).toMatchObject({ auth_token: "123", preview: "0" })
+    expect(api.mergeParams()).toMatchObject({ auth_token: "123", preview: "0" })
   })
-  test('createParams(): custom params', () => {
+  test('mergeParams(): custom params', () => {
     const api = new APIWrapper('123', false, 2500, config)
     const customParam = { custom: true }
-    expect(api.createParams(customParam)).toMatchObject({ auth_token: "123", preview: "0", custom: true })
+    expect(api.mergeParams(customParam)).toMatchObject({ auth_token: "123", preview: "0", custom: true })
   })
-  test('createParams(): custom preview params will overwrite default preview mode', () => {
+  test('mergeParams(): custom preview params: will overwrite default preview mode', () => {
     const api = new APIWrapper('123', false, 2500, config)
     const customParam = { preview: true }
-    expect(api.createParams(customParam)).toMatchObject({ auth_token: "123", preview: "1" })
+    expect(api.mergeParams(customParam)).toMatchObject({ auth_token: "123", preview: "1" })
   })
 
   test('createUrl(): builds url without params', () => {
     const api = new APIWrapper('123', false, 2500, config)
-    const customParam = { preview: true }
     expect(api.createURL('https://example.com', 'some-path')).toEqual('https://example.com/some-path')
   })
   test('createUrl(): builds url with params', () => {
@@ -44,6 +43,19 @@ describe('APIWrapper', () => {
     const customParam = { preview: true, something: 'else' }
     expect(api.createURL('https://example.com', 'some-path', customParam)).toEqual('https://example.com/some-path?preview=true&something=else')
   })
+  test('createUrl(): builds url ignoring undefined params', () => {
+    const api = new APIWrapper('123', false, 2500, config)
+    // ignore category undefined ts error
+    // @ts-ignore
+    const customParam = { preview: true, something: 'else', category: undefined }
+    expect(api.createURL('https://example.com', 'some-path', customParam)).toEqual('https://example.com/some-path?preview=true&something=else')
+  })
+  test('createUrl(): builds url ignoring empty string params', () => {
+    const api = new APIWrapper('123', false, 2500, config)
+    const customParam = { preview: true, something: 'else', category: '' }
+    expect(api.createURL('https://example.com', 'some-path', customParam)).toEqual('https://example.com/some-path?preview=true&something=else')
+  })
+  
 
   test('get() - calls expected URL with expected HEADERS', async () => {
     fetchMock.mockResponse(JSON.stringify({}));

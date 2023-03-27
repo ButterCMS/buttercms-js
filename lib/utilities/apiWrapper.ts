@@ -1,4 +1,3 @@
-
 import fetch from './fetch'
 
 import { BUTTER_BASE_API_URL, BUTTER_BASE_HEADERS } from '../config'
@@ -19,7 +18,7 @@ export class APIWrapper {
   }
 
   // rome-ignore lint/suspicious/noExplicitAny: <explanation>
-  createParams (_params?: Record<string, any>) {
+  mergeParams (_params?: Record<string, any>) {
     const params = {
       auth_token: this.#token,
       preview: this.#previewMode ? '1' : '0',
@@ -36,13 +35,17 @@ export class APIWrapper {
   // rome-ignore lint/suspicious/noExplicitAny: <explanation>
   createURL(base: string, path: string, params?: Record<string, any>) {
     let url = `${base}/${path}`
-
+    
+    // if there is params, format them and append to url
     if (params) {
       // add param ?
       url = `${url}?`
       // add each param to the string
       for (let param in params) {
-        url = `${url}${param}=${params[param]}&`
+        // check param is defined and is not empty string
+        if (typeof params[param] !== 'undefined' && params[param] !== '') {
+          url = `${url}${param}=${params[param]}&`
+        }
       }
       // remove trailing &
       url = url.slice(0, -1)
@@ -53,8 +56,7 @@ export class APIWrapper {
 
   // rome-ignore lint/suspicious/noExplicitAny: <explanation>
   async get<T extends string | object> (url: string, params?: Record<string, any>): Promise<T> {
-    //const butterUrl = `${this.#baseURL}/${url}?${this.createParams(params)}`
-    const butterUrl = this.createURL(this.#baseURL, url, this.createParams(params))
+    const butterUrl = this.createURL(this.#baseURL, url, this.mergeParams(params))
 
     if (typeof this.#config.beforeHook !== 'undefined') {
       await this.#config.beforeHook(butterUrl, params)
