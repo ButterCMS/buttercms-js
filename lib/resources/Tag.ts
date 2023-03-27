@@ -4,7 +4,7 @@ import type {
   TagListResponse,
   TagParams,
   TagRetrieveResponse
-} from '../butter.d'
+} from '../types/Butter'
 
 export class Resource_Tag {
   api: APIWrapper

@@ -3,7 +3,7 @@ import type { APIWrapper } from "../utilities/apiWrapper"
 import type {
   FeedParams,
   FeedTypes
-} from '../butter.d'
+} from '../types/Butter'
 
 export class Resource_Feed {
   api: APIWrapper

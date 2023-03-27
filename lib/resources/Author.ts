@@ -4,7 +4,7 @@ import type {
   AuthorListResponse,
   AuthorParams,
   AuthorRetrieveResponse,
-} from '../butter.d'
+} from '../types/Butter'
 
 export class Resource_Author {
   api: APIWrapper

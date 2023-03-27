@@ -6,7 +6,7 @@ import type {
   PageMethods,
   PostMethods,
   ContentMethods
-} from './butter.d'
+} from './types/Butter'
 
 import type { GlobalButterConfig } from './types/GlobalButterConfig'
 

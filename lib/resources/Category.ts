@@ -4,7 +4,7 @@ import type {
   CategoryListResponse,
   CategoryParams,
   CategoryRetrieveResponse
-} from '../butter.d'
+} from '../types/Butter'
 
 export class Resource_Category {
   api: APIWrapper

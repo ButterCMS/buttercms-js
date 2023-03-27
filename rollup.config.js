@@ -20,7 +20,7 @@ export default [
 		]
 	},
 	{
-		input: "lib/butter.d.ts",
+		input: "lib/types/Butter.d.ts",
 		plugins: [dts()],
 		output: {
 			file: "dist/butter.d.ts",

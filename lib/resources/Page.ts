@@ -7,7 +7,7 @@ import type {
   PageRetrieveResponse,
   PageSearchParams,
   PageSearchResponse
-} from '../butter.d'
+} from '../types/Butter'
 
 export class Resource_Page {
   api: APIWrapper

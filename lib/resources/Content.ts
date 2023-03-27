@@ -5,7 +5,7 @@ import type {
   ContentModelTopLevelValues,
   ContentParams,
   ContentResponse
-} from '../butter.d'
+} from '../types/Butter'
 
 export class Resource_Content {
   api: APIWrapper

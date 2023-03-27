@@ -7,7 +7,7 @@ import type {
   PostRetrieveResponse,
   PostSearchParams,
   PostSearchResponse,
-} from '../butter.d'
+} from '../types/Butter'
 
 export class Resource_Post {
   api: APIWrapper
