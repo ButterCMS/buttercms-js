@@ -66,12 +66,16 @@ export class APIWrapper {
       headers: { ...BUTTER_BASE_HEADERS, ...this.#config.headers }
     }, this.#config.retries)
 
-    const json = await response?.json()
+    try {
+      const json = await response.json()
 
-    if (typeof this.#config.afterHook !== 'undefined') {
-      await this.#config.afterHook(butterUrl, params, json)
+      if (typeof this.#config.afterHook !== 'undefined') {
+        await this.#config.afterHook(butterUrl, params, json)
+      }
+
+      return json
+    } catch (e) {
+      throw `ButterCMS: Api Error, Status: ${response.status}`
     }
-
-    return json
   }
 }

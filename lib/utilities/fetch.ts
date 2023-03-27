@@ -2,7 +2,7 @@ import fetch from 'isomorphic-unfetch'
 
 export default async function fetchRetry (url: string, requestConfig: RequestInit, retries = 1): Promise<Response> {
   const response = await fetch(url, requestConfig)
-  if (response?.ok) {
+  if (response.ok) {
     return response
   }
 

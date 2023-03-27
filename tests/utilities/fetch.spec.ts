@@ -8,27 +8,31 @@ describe('fetch', () => {
   })
 
   test('success', async () => {
-    fetchMock.mockResponse(JSON.stringify({ hello: 'world' }));
+    fetchMock.mockResponse(JSON.stringify({ hello: 'butter' }), { status: 200, statusText: 'ok' });
 
-    await fetch('https://example.co.uk', {}, 0)
+    const response = await fetch('https://example.co.uk', {}, 0)
 
     expect(fetchMock).toHaveBeenCalledWith('https://example.co.uk', {})
+    expect(response.ok).toEqual(true)
+    expect(response.body).toBeTruthy()
   })
+  
   test('fail: zero retries', async () => {
     fetchMock.mockResponse('fail', {
       status: 500
     })
 
-    await fetch('https://example.co.uk', {}, 0)
+    const response = await fetch('https://example.co.uk', {}, 0)
 
     expect(fetchMock).toHaveBeenCalledTimes(1)
+    expect(response.ok).toEqual(false)
   })
-  test('fail: one retry', async () => {
+  test('fail: one retry (default retry setting)', async () => {
     fetchMock.mockResponse('fail', {
       status: 500
     })
 
-    await fetch('https://example.co.uk', {}, 1)
+    await fetch('https://example.co.uk', {})
 
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
