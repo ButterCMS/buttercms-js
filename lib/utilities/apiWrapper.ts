@@ -63,7 +63,7 @@ export class APIWrapper {
     }
 
     /* create timeout controller */
-    const controller = typeof AbortController === 'function' ? new AbortController() : require('abortcontroller-polyfill/dist/cjs-ponyfill').AbortController
+    const controller = new AbortController()
     // create timeout using AbortController.abort to abort fetch requests
     const timeout = setTimeout(() => {
       controller.abort()
