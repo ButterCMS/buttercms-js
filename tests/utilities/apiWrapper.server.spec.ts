@@ -10,7 +10,7 @@ const config = {
   afterHook: async () => Promise.resolve(() => console.log('afterHook'))
 }
 
-describe('APIWrapper', () => {
+describe('APIWrapper: Server', () => {
   beforeEach(() => {
     fetchMock.resetMocks()
   })
@@ -75,7 +75,7 @@ describe('APIWrapper', () => {
   })  
 
   describe('get()', () => {
-    test('calls expected URL with expected HEADERS', async () => {
+    test('calls expected URL with expected fetch config', async () => {
       fetchMock.mockResponse(JSON.stringify({}));
   
       const api = new APIWrapper('123', false, 2500, config)
@@ -86,7 +86,8 @@ describe('APIWrapper', () => {
         headers: {
           ...BUTTER_BASE_HEADERS,
           ...config.headers
-        }
+        },
+        signal: expect.any(AbortSignal)
       })
       expect(fetchMock).toHaveBeenCalledTimes(1)
     })
@@ -117,17 +118,47 @@ describe('APIWrapper', () => {
       expect(response).toMatchObject({ hello: 'world' })
       expect(fetchMock).toHaveBeenCalledTimes(1)
     })
-
-    test('handles error', async () => {
-      fetchMock.mockResponse('fail', {
-        status: 500
-      });
+    describe('error handling', () => {
+      test('fetch server error', async () => {
+        fetchMock.mockResponse('fail', {
+          status: 500
+        });
+    
+        const api = new APIWrapper('123', false, 2500, config)
+        
+        await expect(async () => api.get('test-path')).rejects.toThrowError('ButterCMS: Api Error, Status: INTERNAL SERVER ERROR')
   
-      const api = new APIWrapper('123', false, 2500, config)
-      
-      await expect(async () => api.get('test-path')).rejects.toEqual('ButterCMS: Api Error, Status: 500')
+        expect(fetchMock).toHaveBeenCalledTimes(1)
+      })
+  
+      test('fetch timeout error', async () => {
+        // mock a response taking 1s (longer than timeout setting) - expect failure 
+        fetchMock.mockResponse(() => new Promise(resolve => setTimeout(() => resolve({ 
+          body: 'ok'
+        }), 500)));
+    
+        const api = new APIWrapper('123', false, 100, config)
+  
+        await expect(async () => api.get('test-path')).rejects.toThrowError('ButterCMS: Api Error, Status: TIMEOUT')
+  
+        expect(fetchMock).toHaveBeenCalledTimes(1)
+      })
 
-      expect(fetchMock).toHaveBeenCalledTimes(1)
+      test('after hook not called on error', async () => {
+        const afterHook = jest.spyOn(config, 'afterHook')
+  
+        fetchMock.mockResponse('fail', {
+          status: 500
+        });
+    
+        const api = new APIWrapper('123', false, 2500, config)
+    
+        await expect(async () => api.get('test-path'))
+    
+        expect(afterHook).toHaveBeenCalledTimes(0)
+  
+        jest.restoreAllMocks()
+      })
     })
   })
 }) 

@@ -10,7 +10,7 @@ export class APIWrapper {
   #config: GlobalButterConfig
   #baseURL = BUTTER_BASE_API_URL;
 
-  constructor (token: string, previewMode: boolean = false, timeout: number = 3000, config: GlobalButterConfig) {
+  constructor (token: string, previewMode: boolean, timeout: number, config: GlobalButterConfig) {
     this.#token = token
     this.#previewMode = previewMode
     this.#timeout = timeout
@@ -62,20 +62,29 @@ export class APIWrapper {
       await this.#config.beforeHook(butterUrl, params)
     }
 
-    const response = await fetch(butterUrl, {
-      headers: { ...BUTTER_BASE_HEADERS, ...this.#config.headers }
+    /* create timeout controller */
+    const controller = new AbortController()
+    const timeout = setTimeout(() => {
+      controller.abort('ButterCMS: Api Error, Status: TIMEOUT')
+    }, this.#timeout)
+
+    const response = await fetch<T>(butterUrl, {
+      headers: { ...BUTTER_BASE_HEADERS, ...this.#config.headers },
+      signal: controller.signal
     }, this.#config.retries)
-
-    try {
-      const json = await response.json()
-
-      if (typeof this.#config.afterHook !== 'undefined') {
-        await this.#config.afterHook(butterUrl, params, json)
-      }
-
-      return json
-    } catch (e) {
-      throw `ButterCMS: Api Error, Status: ${response.status}`
+      .catch((e: Error) => {
+        let error = e.message.toUpperCase()
+        if (e.name === 'AbortError') {
+          error = 'TIMEOUT'
+        }
+        throw new Error(`ButterCMS: Api Error, Status: ${error}`)
+      })
+      .finally(() => clearTimeout(timeout))
+    
+    if (typeof this.#config.afterHook !== 'undefined') {
+      await this.#config.afterHook(butterUrl, params, response)
     }
+
+    return response as T
   }
 }
