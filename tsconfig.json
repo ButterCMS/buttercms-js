@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "incremental": false,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "lib": ["es2020", "dom"],
+    "module": "ES6",
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "rootDir": "./",
+    "skipLibCheck": true,
+    "target": "ES6",
+    "types": ["@types/node", "@types/jest"]
+  },
+  "include": ["lib/**/*.ts"]
+}
