@@ -1,6 +1,6 @@
 {
   "name": "buttercms",
-  "version": "1.2.9",
+  "version": "1.2.10",
   "description": "ButterCMS API Client",
   "keywords": [
     "buttercms",
@@ -24,7 +24,7 @@
   "main": "lib/butter.js",
   "types": "lib/butter.d.ts",
   "dependencies": {
-    "axios": "^1.2.5"
+    "axios": "^0.21.1"
   },
   "license": "MIT",
   "devDependencies": {
