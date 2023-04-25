@@ -1,0 +1,31 @@
+{
+  "meta": {
+    "previous_page": null,
+    "next_page": null,
+    "count": 2
+  },
+  "data": [
+    {
+      "slug": "single-page-1",
+      "page_type": null,
+      "published": "2019-11-12T17:23:53.109696Z",
+      "updated": "2020-10-22T20:07:52.965850Z",
+      "fields": {
+        "title": "This is a single page",
+        "body": "<p>Single PAGE!</p>"
+      }
+    },
+    {
+      "slug": "single-page-2",
+      "page_type": null,
+      "published": "2019-11-12T17:23:53.109696Z",
+      "updated": "2020-10-22T20:07:52.965850Z",
+      "fields": {
+        "title": "Amazing Single Page",
+        "body": "<p>Another single page!</p>",
+        "tag": "example",
+        "genre": "api"
+      }
+    }
+  ]
+}
