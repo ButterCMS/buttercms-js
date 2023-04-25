@@ -19,7 +19,7 @@
     "test": "npm run build && npm run test:all",
     "test:all": "npm run jest",
     "test:watch": "npm run jest --watch",
-    "jest": "node --experimental-vm-modules node_modules/.bin/jest",
+    "jest": "node --experimental-vm-modules node_modules/.bin/jest"
   },
   "homepage": "https://github.com/buttercms/buttercms-js",
   "author": "ButterCMS <support@buttercms.com>",
