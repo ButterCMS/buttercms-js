@@ -7,10 +7,10 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.buttercms.com/buttercms-1.2.11.min.js"></script>
+  <script src="./lib/butter.min.js"></script>
   <script>
     $(function() {
-      var butter = Butter('your_buttercms_api_token_here');
+      var butter = Butter('your_buttercms_token_here');
 
       butter.post.list({page: 1, page_size: 10}).then(function(resp) {
         var body = resp.data;

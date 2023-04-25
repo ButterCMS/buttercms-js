@@ -7,7 +7,7 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.buttercms.com/buttercms-1.0.17.min.js"></script>
+  <script src="https://cdnjs.buttercms.com/buttercms-1.2.11.min.js"></script>
   <script>
     $(function() {
       function axiosHook(axios) {
@@ -18,7 +18,7 @@
         })
       }
 
-      var butter = Butter('api_token', false, 3000, axiosHook);
+      var butter = Butter('your_buttercms_token_here', false, 3000, axiosHook);
 
       butter.post.list({page: 1, page_size: 10}).then(function(resp) {
         var body = resp.data;

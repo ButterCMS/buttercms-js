@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.11 (April 17, 2023)
+
+### Updated
+- Updated axios from 1.2.5 to ^1.3.5
+- Fixed bug with axios.create()
+
 ## 1.2.10 (Feb 27, 2023)
 
 ### Added
