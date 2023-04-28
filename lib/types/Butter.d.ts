@@ -260,14 +260,14 @@ export interface TagMethods {
 // Author //
 ////////////
 
-interface AuthorParams {
+export interface AuthorParams {
   /**
    * Get 10 most recent posts by the author
    */
   include?: "recent_posts";
 }
 
-interface Author<AuthorSlug extends string = string> {
+export interface Author<AuthorSlug extends string = string> {
   first_name: string;
   last_name: string;
   email: string;
@@ -460,7 +460,7 @@ export interface PageMethods {
 
 export type ContentParams<ContentModel extends object = object> =
   WithFieldsPrefix<ContentModel> & {
-    previews?: 0 | 1;
+    preview?: 0 | 1;
     order?: keyof OrderParam<ContentModel>;
     page?: number;
     page_size?: number;
