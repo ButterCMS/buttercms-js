@@ -1,0 +1,34 @@
+{
+  "data": {
+    "slug": "example-news-page",
+    "name": "Example News Page",
+    "page_type": "news",
+    "published": "2019-11-12T17:23:53.109696Z",
+    "updated": "2020-10-22T20:07:52.965850Z",
+    "fields": {
+      "seo": {
+        "title": "Example News Page",
+        "description": "SEO Description",
+        "keywords": "SEO, Keywords"
+      },
+      "headline": "This is an example news page",
+      "sections": [
+        {
+          "fields": {
+            "headline": "...",
+            "subheadline": "...",
+            "call_to_action": "..."
+          },
+          "type": "hero"
+        },
+        {
+          "fields": {
+            "video_headline": "...",
+            "video_link": "..."
+          },
+          "type": "product_video"
+        }
+      ]
+    }
+  }
+}
