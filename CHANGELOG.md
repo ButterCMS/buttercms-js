@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.12 (May 1st, 2023)
+
+### Updated
+- Upgrade axios to 1.3.6
+- Upgrade webpack to 5.81.0
+
+### Added
+- Added testing with jest
+
 ## 1.2.11 (April 17, 2023)
 
 ### Updated
