@@ -4,7 +4,7 @@
 
 All commit messages have to follow the [conventionalcommits.org](https://conventionalcommits.org) format specification.
 
-1. Make sure your are on the `master` branch.
+1. Make sure you are on the `master` branch.
 2. Make sure that you have committed everything and that your code is working.
 3. Run `npx standard-version`. This command updates the changelog with description of changes to your code since the last released version. It then increments the code version. All these changes are commited into the `master` branch.
 4. Push these changes to the remote repository and its `master` branch.
