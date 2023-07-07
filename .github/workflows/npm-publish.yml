@@ -1,0 +1,21 @@
+# This workflow will publish a package to npmjs.com when a release is created
+# For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
+
+name: Node.js Package
+
+on: push
+
+jobs:
+  publish-npm:
+    if: github.ref == 'refs/heads/master' && github.event_name == 'push' && contains(github.event.head_commit.message, 'chore(release)')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: https://registry.npmjs.org/
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          
