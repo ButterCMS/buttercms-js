@@ -3,11 +3,14 @@
 
 name: Node.js Package
 
-on: push
-
+on:
+  push:
+    branches:
+      - master
+ 
 jobs:
   publish-npm:
-    if: github.ref == 'refs/heads/master' && github.event_name == 'push' && contains(github.event.head_commit.message, 'chore(release)')
+    if: contains(github.event.head_commit.message, 'chore(release)') 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
