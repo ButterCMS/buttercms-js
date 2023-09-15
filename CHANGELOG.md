@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.13](https://github.com/ButterCMS/buttercms-js/compare/v1.2.12...v1.2.13) (2023-09-15)
+
+
+### Bug Fixes
+
+* issue calling axios.create undefined ([0cc86c9](https://github.com/ButterCMS/buttercms-js/commit/0cc86c9adbb313c99d07d57ea2562dd9d82444bd))
+
 ## 1.2.12 (May 1st, 2023)
 
 ### Updated
