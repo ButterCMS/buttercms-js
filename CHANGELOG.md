@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.14](https://github.com/ButterCMS/buttercms-js/compare/v1.2.13...v1.2.14) (2023-09-19)
+
+
+### Bug Fixes
+
+* Update CONTRIBUTING.md ([65a9432](https://github.com/ButterCMS/buttercms-js/commit/65a9432a2d2c2ca6f00cee6961f0226f3a2789bd))
+
 ## [1.2.13](https://github.com/ButterCMS/buttercms-js/compare/v1.2.12...v1.2.13) (2023-09-15)
 
 
