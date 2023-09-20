@@ -8,9 +8,9 @@ For a comprehensive list of examples, check out the [API documentation](https://
 
 ## Installation
 
-Requires node.js version 4 or greater.
+Requires Node.js version 10 or greater.
 
-```
+```bash
 npm install buttercms --save
 ```
 
@@ -28,14 +28,7 @@ Every resource is accessed via your butter instance:
 const butter = require('buttercms')('api_token_567abe');
 ```
 
-Using ES6:
-
-```js
-import Butter from 'buttercms';
-const butter = Butter('api_token_567abe');
-```
-
-Using TypeScript:
+Using ES6 or Typescript:
 
 ```js
 import Butter from 'buttercms';
@@ -119,7 +112,6 @@ const butter = require('buttercms')('your butter API token', process.env.BUTTER_
   * `retrieve(type[, params])`
   
 See our [node app](https://github.com/buttercms/nodejs-cms-express-blog) for a full example.
-
 
 ## Timeouts
 
