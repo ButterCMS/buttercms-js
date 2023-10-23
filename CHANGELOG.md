@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.15](https://github.com/ButterCMS/buttercms-js/compare/v1.2.14...v1.2.15) (2023-10-23)
+
+
+### Bug Fixes
+
+* typo in readme ([fd947bd](https://github.com/ButterCMS/buttercms-js/commit/fd947bdb5bab7aea3969b98a6642c5b617b8db67))
+
 ## [1.2.14](https://github.com/ButterCMS/buttercms-js/compare/v1.2.13...v1.2.14) (2023-09-19)
 
 

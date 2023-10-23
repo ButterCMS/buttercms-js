@@ -18,7 +18,7 @@ Butter can also be included directly in HTML:
 
 <!-- {x-release-please-start-version} -->
 ```html
-<script src="https://cdnjs.buttercms.com/buttercms-1.2.14.min.js"></script>
+<script src="https://cdnjs.buttercms.com/buttercms-1.2.15.min.js"></script>
 ```
 <!-- {x-release-please-end} -->
 
