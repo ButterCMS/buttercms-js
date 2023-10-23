@@ -56,7 +56,7 @@ butter.post.list({page: 1, page_size: 10}).then(function(response) {
 
 ## Pages
 
-Where you see params, it is a plain js object, e.g. `{page: 1}`. For a list of params see the [API documentation](https://buttercms.com/docs/api/?javascript)
+Where you see params it is a plain js object, e.g. `{page: 1}`. For a list of params see the [API documentation](https://buttercms.com/docs/api/?javascript)
 
 * page
   * `retrieve(page_type, page_slug[, params])`
