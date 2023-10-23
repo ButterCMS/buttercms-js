@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.15](https://github.com/ButterCMS/buttercms-js/compare/v1.2.14...v1.2.15) (2023-10-23)
+
+
+### Bug Fixes
+
+* bump @babel/traverse from 7.21.4 to 7.23.2 ([8e3fcd5](https://github.com/ButterCMS/buttercms-js/commit/8e3fcd5fba9e5fa0abb1cc856fdff59d3578e71e))
+
 ## [1.2.14](https://github.com/ButterCMS/buttercms-js/compare/v1.2.13...v1.2.14) (2023-09-19)
 
 
