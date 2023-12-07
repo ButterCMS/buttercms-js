@@ -31,7 +31,7 @@
   "types": "lib/butter.d.ts",
   "type": "commonjs",
   "dependencies": {
-    "axios": "~0.21.1"
+    "axios": "~1.6.0"
   },
   "license": "MIT",
   "devDependencies": {
