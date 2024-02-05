@@ -1,6 +1,6 @@
 {
   "name": "buttercms",
-  "version": "1.2.16",
+  "version": "2.0.0",
   "description": "ButterCMS API Client",
   "keywords": [
     "buttercms",
@@ -10,7 +10,7 @@
     "headless cms"
   ],
   "engines": {
-    "node": ">=0.10.32"
+    "node": ">=18.17.1"
   },
   "scripts": {
     "build": "webpack && uglifyjs ./dist/butter.js -c -m -o ./dist/butter.min.js",
