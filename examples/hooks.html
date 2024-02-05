@@ -1,0 +1,75 @@
+<html>
+<head>
+  <title>Example usage with Fetch Hooks</title>
+</head>
+<body>
+  <div id="posts">
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="./lib/butter.min.js"></script>
+  <script>
+    $(function() {
+      
+      const butter = Butter(
+        'your_buttercms_api_token_here',
+        {
+          onError (error, config) { 
+            console.log("on Error for: ", config.type, error, config)
+          },
+          async onRequest (resource, config) {
+            console.log("requestHook", config.type, resource, config)
+            config.type === "page" && await config.cancelRequest()
+
+            return config
+          },
+          async onResponse (response, config) {
+            console.log("responseHook", config.type, response, config)
+            console.log(await response.text())
+            return 
+          }
+        }
+      );
+
+      butter.post.list({
+        page: 1,
+        page_size: 10
+      })
+        .then(
+          (resp) => {
+            const {
+              meta,
+              data: posts
+            } = resp
+
+            if (!posts) return
+
+            for(i = 0; i < posts.length; i++) {
+              var title = posts[i].title;
+              $('#posts').append(
+                `
+                  ${ title }<br>
+                  ${ posts[i].url }<br>
+                  Previous Page: ${ meta.previous_page  }<br>
+                  Next Page: ${ meta.next_page  }<br>
+                `
+              )
+            }
+          }
+        )
+        .catch(
+          (error) => console.error("post: ", error)
+        );
+     
+
+      butter.page.list("*")
+        .then(
+          (res) => console.log(res)
+        )
+        .catch(
+          (error) => console.error("page: ", error)
+        )
+    });
+  </script>
+</body>
+</html>

@@ -1,36 +1,83 @@
-const butter = require('../lib/butter')('api_token');
+import Butter from "../lib/butter.js";
 
-test('should retrive a single page', async () => {
-  const singlePageResponse = await butter.page.retrieve('*', 'example-news-page', {
-    "locale": "en",
-    "preview": 1
-  })
+const butter = Butter("api_token");
 
-  const response = await singlePageResponse.data;
-  const status_code = await singlePageResponse.status;
+test(
+  "should retrieve a single page", 
+  async () => {
 
-  await expect(status_code).toEqual(200);
+    const singlePageResponse = await butter.page.retrieve(
+      "*",
+      "example-news-page", 
+      {
+        "locale": "en",
+        "preview": 1
+      }
+    )
 
-  await expect(response.data.fields.headline).toEqual("This is an example news page");
-  await expect(response.data.slug).toEqual("example-news-page")
-  await expect(response.data.page_type).not.toEqual("sport")
-});
+    const response = await singlePageResponse;
 
-test('should list pages by single-pages', async () => {
-  const singlePageResponse = await butter.page.list('*')
+    await expect(response.data.fields.headline).toEqual("This is an example news page");
+    await expect(response.data.slug).toEqual("example-news-page")
+    await expect(response.data.page_type).not.toEqual("sport")
 
-  const response = await singlePageResponse.data;
-  const status_code = await singlePageResponse.status;
+    return
+  }
+);
 
-  await expect(status_code).toEqual(200);
+test(
+  "should respond with error when access a bad page slug", 
+  async () => {
+    try {
+      const singlePageResponse = await butter.page.retrieve(
+        "*",
+        "fake-post-slug", 
+        {
+          "locale": "en",
+          "preview": 1
+        }
+      )
+    }
+    catch (error) {
+      await expect(error).toBeInstanceOf(Error);
+      await expect(error.message).toEqual("TypeError: Failed to fetch");
+      
+    }
+    
+    return
 
-  await expect(response.meta.count).toEqual(2);
-  await expect(response.data).toHaveLength(2);
+  }
+);
 
-  const firstPage = response.data[0];
+test(
+  "should list pages by single-pages", 
+  async () => {
+      const response = await butter.page.list('*')
+      
+      await expect(response.meta.count).toEqual(2);
+      await expect(response.data).toHaveLength(2);
+  
+      const firstPage = response.data[0];
+  
+      await expect(firstPage).toHaveProperty('slug', 'single-page-1');
+      await expect(firstPage).toHaveProperty('fields.title', 'This is a single page');
+  
+      await expect(firstPage).not.toHaveProperty('date_time');
+  }
+)
 
-  await expect(firstPage).toHaveProperty('slug', 'single-page-1');
-  await expect(firstPage).toHaveProperty('fields.title', 'This is a single page');
+test(
+  "should catch and relay error when page type not found", 
+  async () => {
+    try {
+      await butter.page.list('as')
+    }
+    catch (error) {
+      await expect(error).toBeDefined();
+      await expect(error).toBeInstanceOf(Error);
+      await expect(error.message).toEqual("Error: Not found");
+    }
 
-  await expect(firstPage).not.toHaveProperty('date_time');
-})
+    return
+  }
+)
