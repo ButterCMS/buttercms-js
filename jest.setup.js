@@ -1,4 +1,4 @@
-const server = require('./mocks/server.js');
+import { server } from "./mocks/server.js";
 
 beforeAll(() => server.listen())
 

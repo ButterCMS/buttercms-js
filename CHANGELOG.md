@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.0.0](https://github.com/ButterCMS/buttercms-js/)(2023-02-01)
+
+### Added
+- Added support for Node.js v18
+- Added support for native fetch API
+- Added explicit `cancelRequest` method to cancel requests
+- Added native fetch timeout support
+- Added 'onRequest' hook to modify request before it is sent
+- Added 'onError' hook to inspect error before it is thrown if error before server
+- Added 'onError' hook to inspect error after it is thrown if error is from fetch or internal browser issue
+- Added 'onResponse' hook to inspect response before it is returned
+
+### Removed
+- Removed support for Node.js v14 and v16
+- Removed support for axios
+
+## [1.2.16](https://github.com/ButterCMS/buttercms-js/releases/tag/Node-Pre-16) (2023-12-07)
+
+This is the last release for Node v14 (and 16) and uses axios for API requests. This branch will no longer be maintained.
+
+## Updated
+- Updated version number
+
+
 ## [1.2.15](https://github.com/ButterCMS/buttercms-js/compare/v1.2.14...v1.2.15) (2023-10-23)
 
 
