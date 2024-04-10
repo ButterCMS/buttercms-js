@@ -6,6 +6,8 @@
 
 For a comprehensive list of examples, check out the [API documentation](https://buttercms.com/docs/api/).
 
+ButterCMS-JS version 2 will be supported until January 2025. Version 3 is slated for launch in November 2024 when Node v20 is moved to maintenance mode.
+
 ## Installation
 
 Requires Node.js version 18 or greater.
@@ -21,6 +23,12 @@ Butter can also be included directly in HTML:
 <script src="https://cdnjs.buttercms.com/buttercms-1.2.15.min.js"></script>
 ```
 <!-- {x-release-please-end} -->
+
+## Native Fetch
+
+ButterCMS-JS version 2 will be using the native fetch API. This means that the fetch API will be used to make requests to the ButterCMS API. This is a breaking change for anyone using version 1 of the ButterCMS-JS package.
+
+Native fetch is built into Node v18 as well as all modern browsers. This lessens the need for third-party fetch libraries and achieves consistency between Node and browser environments.
 
 ## Overview
 
