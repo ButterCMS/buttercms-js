@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/ButterCMS/buttercms-js/compare/v2.0.0...v2.0.1) (2024-04-10)
+
+
+### Bug Fixes
+
+* update readme re: support and use of native fetch ([b193bca](https://github.com/ButterCMS/buttercms-js/commit/b193bcad47b7db77f86290bf7976be4191ec87c3))
+
 ## [2.0.0](https://github.com/ButterCMS/buttercms-js/)(2023-02-01)
 
 ### Added
