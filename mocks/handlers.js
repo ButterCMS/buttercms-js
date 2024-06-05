@@ -12,6 +12,11 @@ const failedSinglePostHandler = http.get(
   () => HttpResponse.error("Failed to fetch")
 )
 
+const failedSinglePostWithGlobHandler = http.get(
+  "https://api.buttercms.com/v2/pages/*/about/fake-post-slug/", 
+  () => HttpResponse.error("Failed to fetch")
+)
+
 const listPageHandlerError = http.get(
   "https://api.buttercms.com/v2/pages/as/", 
   () => HttpResponse.json(
@@ -34,6 +39,7 @@ const listPageHandler = http.get(
 export default [
   singlePostHandler,
   failedSinglePostHandler,
+  failedSinglePostWithGlobHandler,
   listPageHandlerError,
   listPageHandler,
 ];
