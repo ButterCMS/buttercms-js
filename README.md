@@ -151,30 +151,45 @@ const butter = Butter(
 );
 ```
 
+### Static Site Mode
+
+When building a static site, use the `isSSG` option to handle large data requests. This disables `AbortController`s, preventing premature fetch cancellations and disabling `cancelRequest`.
+
+```js
+const butter = Butter(
+  "your butter API token", 
+  { isSSG: true }
+);
+```
+
+When requesting large amounts of data at generation, your build environment may run low on memory without the `isSSG` option enabled, as `AbortControllers` can create too many event listeners when they are unwarranted.
+
 ## Blog Engine
 
 * post
   * `retrieve(slug[, params])`
   * `list([params])`
   * `search(query[, params])`
-  * `cancelRequest()`
+  * `cancelRequest()`*
 * category
   * `retrieve(slug[, params])`
   * `list([params])`
-  * `cancelRequest()`
+  * `cancelRequest()`*
 * tag
   * `retrieve(slug[, params])`
   * `list([params])`
-  * `cancelRequest()`
+  * `cancelRequest()`*
 * author
   * `retrieve(slug[, params])`
   * `list([params])`
-  * `cancelRequest()`
+  * `cancelRequest()`*
 * feed
   * `retrieve(type[, params])`
-  * `cancelRequest()`
+  * `cancelRequest()`*
   
 See our [node app](https://github.com/buttercms/nodejs-cms-express-blog) for a full example.
+
+* `cancelRequest()` is not available during static site generation
 
 ## Timeouts
 
@@ -187,6 +202,8 @@ const butter = Butter(
 );
 ```
 
+Timeouts are not used during static site generation and should be handled by your build tool.
+
 ## Caching
 
 The default cache is set to `default`:
@@ -198,6 +215,8 @@ const butter = Butter(
 );
 ```
 
+If the `isSSG` option is enabled, the cache will automatically set to `no-cache` to speed up your requests at the time of build.
+
 ## Canceling a request
 
 Each resource returns a `cancelRequest` method that can be used to cancel a request:
@@ -207,6 +226,8 @@ butter.post.cancelRequest();
 ```
 
 This will cancel all pending requests for that resource type. It will catch the cancelation and return a rejected Promise for your `.catch()` method or be able to be caught in an `async` function via a `try`/`catch` block.
+
+If the `isSSG` option is enabled, the `cancelRequest` method will not be available.
 
 
 ## Hooks

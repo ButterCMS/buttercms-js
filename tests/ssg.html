@@ -1,0 +1,80 @@
+<html>
+<head>
+  <title>Browser Example</title>
+</head>
+<body>
+  <dl id="collections">
+  </dl>
+  <br/>
+  <dl id="posts">
+  </dl>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="./lib/butter.min.js"></script>
+  <script>
+    $(function() {
+      const butter = Butter(
+        'your_buttercms_api_token_here',
+        {
+            isSSG: true
+        }
+      );
+
+      butter.content.retrieve('my-collection')
+        .then(
+          (resp) => {
+            const {
+              data: collections,
+              meta
+            } = resp
+
+            if (collections) {
+              const collection = collections["my-collection"]
+              for(i = 0; i < collection.length; i++) {
+                var title = collection[i].title;
+                var desc = collection[i].description;
+                $('#collections').append(
+                  `
+                    <dt>${ title }</dt>
+                    <dd>${ desc }</dd>
+                  `
+                )
+              }
+            }
+          }
+        );
+      butter.content.cancelRequest()
+
+      butter.post.list({
+        page: 1,
+        page_size: 10
+      })
+        .then(
+          (resp) => {
+            const {
+              meta,
+              data: posts
+            } = resp
+            
+            if (posts) {
+              for(i = 0; i < posts.length; i++) {
+                var title = posts[i].title;
+                $('#posts').append(
+                  `
+                    <dt>${ title }</dt>
+                    <dd>
+                      ${ posts[i].url }<br>
+                      Previous Page: ${ meta.previous_page  }<br>
+                      Next Page: ${ meta.next_page  }<br>
+                    </dd>
+                  `
+                )
+              }
+            }
+          }
+        );
+        butter.post.cancelRequest()
+    });
+  </script>
+</body>
+</html>
