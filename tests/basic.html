@@ -14,7 +14,7 @@
   <script>
     $(function() {
       const butter = Butter(
-        'your_buttercms_api_token_here'
+        'your_buttercms_api_token_here',
       );
 
       butter.content.retrieve('my-collection')
@@ -39,7 +39,14 @@
               }
             }
           }
+        )
+        // add the catch to ensure you do not receive a "uncaught (in promise) warning"
+        .catch(
+          (err) => {
+            console.error(err)
+          }
         );
+
       butter.content.cancelRequest()
 
       butter.post.list({
@@ -69,7 +76,14 @@
               }
             }
           }
+        )
+        // add the catch to ensure you do not receive a "uncaught (in promise) warning"
+        .catch(
+          (err) => {
+            console.error(err)
+          }
         );
+        
         butter.post.cancelRequest()
     });
   </script>
