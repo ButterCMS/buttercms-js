@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.2](https://github.com/ButterCMS/buttercms-js/compare/v2.0.1...v2.0.2) (2024-06-13)
+
+
+### Bug Fixes
+
+* enhanced garbage collection on fetch aborts & error messaging ([14e97e3](https://github.com/ButterCMS/buttercms-js/commit/14e97e33783f85f819204d0beb7e880b556f1e2d))
+
 ## [2.0.1](https://github.com/ButterCMS/buttercms-js/compare/v2.0.0...v2.0.1) (2024-04-10)
 
 
