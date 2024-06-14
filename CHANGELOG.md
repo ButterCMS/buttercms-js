@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.3](https://github.com/ButterCMS/buttercms-js/compare/v2.0.2...v2.0.3) (2024-06-14)
+
+
+### Bug Fixes
+
+* Update package.json ([2e6ff8b](https://github.com/ButterCMS/buttercms-js/commit/2e6ff8bc632b3d1f8d9b31b1379dad75db428ec4))
+
 ## [2.0.2](https://github.com/ButterCMS/buttercms-js/compare/v2.0.1...v2.0.2) (2024-06-13)
 
 
