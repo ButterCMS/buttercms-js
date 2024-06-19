@@ -21,6 +21,13 @@ test(
     await expect(response.data.slug).toEqual("example-news-page")
     await expect(response.data.page_type).not.toEqual("sport")
 
+    // ensure we can get the page with the real page type attached
+    const response2 = await butter.page.retrieve('news', 'example-news-page')
+
+    await expect(response2.data.fields.headline).toEqual("This is an example news page");
+    await expect(response2.data.slug).toEqual("example-news-page")
+    await expect(response2.data.page_type).not.toEqual("sport")
+
     return
   }
 );
@@ -32,6 +39,22 @@ test(
       const singlePageResponse = await butter.page.retrieve(
         "*",
         "fake-post-slug", 
+        {
+          "locale": "en",
+          "preview": 1
+        }
+      )
+    }
+    catch (error) {
+      await expect(error).toBeInstanceOf(Error);
+      await expect(error.message).toEqual("TypeError: Failed to fetch");
+      
+    }
+
+    try {
+      const singlePageResponse2 = await butter.page.retrieve(
+        "*/about",
+        "example-news-page", 
         {
           "locale": "en",
           "preview": 1
@@ -63,6 +86,33 @@ test(
       await expect(firstPage).toHaveProperty('fields.title', 'This is a single page');
   
       await expect(firstPage).not.toHaveProperty('date_time');
+
+      return
+  }
+)
+
+test(
+  "should list pages by single-pages and then retrieve a pageTyped page", 
+  async () => {
+      const response = await butter.page.list('*')
+      
+      await expect(response.meta.count).toEqual(2);
+      await expect(response.data).toHaveLength(2);
+  
+      const firstPage = response.data[0];
+  
+      await expect(firstPage).toHaveProperty('slug', 'single-page-1');
+      await expect(firstPage).toHaveProperty('fields.title', 'This is a single page');
+  
+      await expect(firstPage).not.toHaveProperty('date_time');
+
+      const response2 = await butter.page.retrieve('news', 'example-news-page')
+
+      await expect(response2.data.fields.headline).toEqual("This is an example news page");
+      await expect(response2.data.slug).toEqual("example-news-page")
+      await expect(response2.data.page_type).not.toEqual("sport")
+      
+      return
   }
 )
 
