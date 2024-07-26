@@ -15,14 +15,16 @@ test(
       }
     )
 
-    const response = await singlePageResponse;
-
+    const response = singlePageResponse.data;
+    
     await expect(response.data.fields.headline).toEqual("This is an example news page");
     await expect(response.data.slug).toEqual("example-news-page")
     await expect(response.data.page_type).not.toEqual("sport")
 
     // ensure we can get the page with the real page type attached
-    const response2 = await butter.page.retrieve('news', 'example-news-page')
+    const singlePageResponse2 = await butter.page.retrieve('news', 'example-news-page')
+
+    const response2 = singlePageResponse2.data;
 
     await expect(response2.data.fields.headline).toEqual("This is an example news page");
     await expect(response2.data.slug).toEqual("example-news-page")
@@ -76,11 +78,11 @@ test(
   "should list pages by single-pages", 
   async () => {
       const response = await butter.page.list('*')
-      
-      await expect(response.meta.count).toEqual(2);
-      await expect(response.data).toHaveLength(2);
+
+      await expect(response.data.meta.count).toEqual(2);
+      await expect(response.data.data).toHaveLength(2);
   
-      const firstPage = response.data[0];
+      const firstPage = response.data.data[0];
   
       await expect(firstPage).toHaveProperty('slug', 'single-page-1');
       await expect(firstPage).toHaveProperty('fields.title', 'This is a single page');
@@ -96,10 +98,10 @@ test(
   async () => {
       const response = await butter.page.list('*')
       
-      await expect(response.meta.count).toEqual(2);
-      await expect(response.data).toHaveLength(2);
+      await expect(response.data.meta.count).toEqual(2);
+      await expect(response.data.data).toHaveLength(2);
   
-      const firstPage = response.data[0];
+      const firstPage = response.data.data[0];
   
       await expect(firstPage).toHaveProperty('slug', 'single-page-1');
       await expect(firstPage).toHaveProperty('fields.title', 'This is a single page');
@@ -108,9 +110,11 @@ test(
 
       const response2 = await butter.page.retrieve('news', 'example-news-page')
 
-      await expect(response2.data.fields.headline).toEqual("This is an example news page");
-      await expect(response2.data.slug).toEqual("example-news-page")
-      await expect(response2.data.page_type).not.toEqual("sport")
+      const exactPage = response2.data
+
+      await expect(exactPage.data.fields.headline).toEqual("This is an example news page");
+      await expect(exactPage.data.slug).toEqual("example-news-page")
+      await expect(exactPage.data.page_type).not.toEqual("sport")
       
       return
   }

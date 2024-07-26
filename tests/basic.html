@@ -23,7 +23,7 @@
             const {
               data: collections,
               meta
-            } = resp
+            } = resp.data
 
             if (collections) {
               const collection = collections["my-collection"]
@@ -58,7 +58,7 @@
             const {
               meta,
               data: posts
-            } = resp
+            } = resp.data
             
             if (posts) {
               for(i = 0; i < posts.length; i++) {
