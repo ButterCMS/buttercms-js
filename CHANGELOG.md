@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.0](https://github.com/ButterCMS/buttercms-js/compare/v2.0.3...v2.1.0) (2024-07-29)
+
+
+### Features
+
+* update response structure to echo schema expected from TS defs and v1 ([1a748fa](https://github.com/ButterCMS/buttercms-js/commit/1a748fabbee60fbfaf547584b18ab31a436b6026))
+
 ## [2.0.3](https://github.com/ButterCMS/buttercms-js/compare/v2.0.2...v2.0.3) (2024-06-14)
 
 
