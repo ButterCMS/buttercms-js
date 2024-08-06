@@ -58,7 +58,7 @@
           }
         )
         .catch(
-          (error) => console.error("post: ", error)
+          (error) => console.error("post: ", err.message, err.cause)
         );
      
 
@@ -67,7 +67,7 @@
           (res) => console.log(res)
         )
         .catch(
-          (error) => console.error("page: ", error)
+          (error) => console.error("page: ", err.message, err.cause)
         )
     });
   </script>

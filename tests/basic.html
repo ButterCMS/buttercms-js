@@ -43,11 +43,11 @@
         // add the catch to ensure you do not receive a "uncaught (in promise) warning"
         .catch(
           (err) => {
-            console.error(err)
+            console.error(err.message, err.cause)
           }
         );
 
-      butter.content.cancelRequest()
+      // butter.content.cancelRequest()
 
       butter.post.list({
         page: 1,
@@ -80,11 +80,11 @@
         // add the catch to ensure you do not receive a "uncaught (in promise) warning"
         .catch(
           (err) => {
-            console.error(err)
+            console.error(err.message, err.cause)
           }
         );
         
-        butter.post.cancelRequest()
+        //butter.post.cancelRequest()
     });
   </script>
 </body>
