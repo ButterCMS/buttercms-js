@@ -129,7 +129,7 @@ test(
     catch (error) {
       await expect(error).toBeDefined();
       await expect(error).toBeInstanceOf(Error);
-      await expect(error.message).toEqual("Error: Not found");
+      await expect(error.message).toEqual("[detail]: Error: Not found (404)");
     }
 
     return
