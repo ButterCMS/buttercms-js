@@ -1,5 +1,14 @@
 # Changelog
 
+## [2.1.1](https://github.com/ButterCMS/buttercms-js/compare/v2.1.0...v2.1.1) (2024-08-12)
+
+
+### Bug Fixes
+
+* add in full cause to thrown errors ([6ede5e4](https://github.com/ButterCMS/buttercms-js/commit/6ede5e49bf06ae1be8445ec511277eb8eb46401f))
+* update abortcontroller/abortSignal for use in Reactive Native ([758172b](https://github.com/ButterCMS/buttercms-js/commit/758172b0b21150b650a09fedaf75914ebf076c20))
+* update error catching to catch all produced errors ([d91d47f](https://github.com/ButterCMS/buttercms-js/commit/d91d47f62488d7947f25250afa3bdb388da69295))
+
 ## [2.1.0](https://github.com/ButterCMS/buttercms-js/compare/v2.0.3...v2.1.0) (2024-07-29)
 
 
