@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.1.2](https://github.com/ButterCMS/buttercms-js/compare/v2.1.1...v2.1.2) (2024-08-22)
+
+
+### Bug Fixes
+
+* error in test action ([b0867ca](https://github.com/ButterCMS/buttercms-js/commit/b0867ca2c71918ca6b1eb0fa74d2bcd657aeb316))
+* update actions for publishing to npm ([b0867ca](https://github.com/ButterCMS/buttercms-js/commit/b0867ca2c71918ca6b1eb0fa74d2bcd657aeb316))
+
 ## [2.1.1](https://github.com/ButterCMS/buttercms-js/compare/v2.1.0...v2.1.1) (2024-08-12)
 
 
