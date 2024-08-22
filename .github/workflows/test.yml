@@ -8,8 +8,17 @@ jobs:
   unit-test:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v3.5.3
+    
+    - name: Set up Node
+        uses: actions/setup-node@v3.7.0
+        with:
+          node-version: 18.17.1
+          registry-url: https://registry.npmjs.org/
+
     - name: Install modules
       run: npm i
+    
     - name: Run tests
       run: npm run test
