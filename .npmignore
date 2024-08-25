@@ -1,0 +1,8 @@
+node_modules
+npm-debug.log
+.DS_Store
+test.js
+yalc
+!dist
+.env
+yarn.lock
