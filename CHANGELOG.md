@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.3](https://github.com/ButterCMS/buttercms-js/compare/v2.1.2...v2.1.3) (2024-08-25)
+
+
+### Bug Fixes
+
+* update main mount in package, configure npm to see minified file output ([18731dd](https://github.com/ButterCMS/buttercms-js/commit/18731dda664d54e3be07bfc65fc195125b554c83))
+
 ## [2.1.2](https://github.com/ButterCMS/buttercms-js/compare/v2.1.1...v2.1.2) (2024-08-22)
 
 
