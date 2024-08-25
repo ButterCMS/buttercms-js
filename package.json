@@ -27,7 +27,7 @@
     "type": "git",
     "url": "git://github.com/buttercms/buttercms-js.git"
   },
-  "main": "lib/butter.js",
+  "main": "dist/butter.min.js",
   "types": "lib/butter.d.ts",
   "type": "module",
   "license": "MIT",
