@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.4](https://github.com/ButterCMS/buttercms-js/compare/v2.1.3...v2.1.4) (2024-09-04)
+
+
+### Bug Fixes
+
+* update cdn link in readme ([d2be0db](https://github.com/ButterCMS/buttercms-js/commit/d2be0dbe85e48f14cc52f680a11fcbd89e8b2d1d))
+
 ## [2.1.3](https://github.com/ButterCMS/buttercms-js/compare/v2.1.2...v2.1.3) (2024-08-25)
 
 
