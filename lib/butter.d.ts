@@ -96,10 +96,11 @@ export namespace Butter {
     AuthorSlug extends string = string,
     PostSlug extends string = string
   > {
-    status: "published" | "draft";
+    status: "published" | "draft" | "scheduled";
     created: Date;
     updated: Date;
     published: Date;
+    scheduled: Date;
     title: string;
     slug: PostSlug;
     summary: string;
@@ -384,6 +385,8 @@ export namespace Butter {
     name: string;
     published: Date;
     updated: Date;
+    scheduled: Date;
+    status: "published" | "draft" | "scheduled";
     fields: PageModel;
   }
 

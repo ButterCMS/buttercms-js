@@ -38,14 +38,14 @@ Using ES6 or Typescript:
 
 ```js
 import Butter from "buttercms";
-const butter = Butter("api_token_567abe");
+const butter = Butter("your_api_token");
 ```
 
 Using CDN:
 
 ```html
 <script>
-  const butter = Butter("api_token_567abe");
+  const butter = Butter("your_api_token");
 </script>
 ```
 
