@@ -1,23 +1,62 @@
 import * as url from 'url';
 import path from "path";
 import webpack from "webpack";
+import TerserPlugin from "terser-webpack-plugin";
+
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
-export default {
-  entry: './lib/butter.js',
-  mode: "production",
-  output: {
-    filename: 'butter.js',
-    globalObject: "this",
-    library: 'Butter',
-    libraryTarget: 'umd',
-    libraryExport: 'default',
-    path: path.resolve(__dirname, 'dist')
+const commonConfig = {
+  devtool: 'source-map', // Enable source maps
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          compress: true,
+          mangle: true,
+          sourceMap: true,
+        },
+      }),
+    ],
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({
-        maxChunks: 1
+      maxChunks: 1
     })
-  ]
-};
+  ],
+}
+
+export default [
+  // UMD Build
+  {
+    entry: './lib/butter.js',
+    mode: "production",
+    output: {
+      filename: 'butter.umd.js',
+      globalObject: "this",
+      library: {
+        name: 'Butter',
+        type: 'umd',
+      },
+      path: path.resolve(__dirname, 'dist')
+    },
+    ...commonConfig
+  },
+  // ES Module Build
+  {
+    entry: './lib/butter.js',
+    mode: "production",
+    output: {
+      filename: 'butter.esm.js',
+      library: {
+        type: 'module'
+      },
+      path: path.resolve(__dirname, 'dist')
+    },
+    experiments: {
+      outputModule: true,
+    },
+    ...commonConfig
+  }
+];
