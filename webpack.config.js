@@ -1,13 +1,12 @@
-import * as url from 'url';
+import * as url from "url";
 import path from "path";
 import webpack from "webpack";
 import TerserPlugin from "terser-webpack-plugin";
 
+const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
-
-const commonConfig = {
-  devtool: 'source-map', // Enable source maps
+const productionConfig = {
+  mode: "production",
   optimization: {
     minimize: true,
     minimizer: [
@@ -15,48 +14,83 @@ const commonConfig = {
         terserOptions: {
           compress: true,
           mangle: true,
-          sourceMap: true,
         },
+        extractComments: false
       }),
     ],
   },
   plugins: [
     new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1
-    })
+      maxChunks: 1,
+    }),
   ],
-}
+};
+
+const developmentConfig = {
+  mode: "development",
+  devtool: 'inline-source-map',
+  optimization: {
+    minimize: false, // No minification in development
+  },
+};
 
 export default [
   // UMD Build
   {
-    entry: './lib/butter.js',
-    mode: "production",
+    ...productionConfig,
+    entry: "./lib/butter.js",
     output: {
-      filename: 'butter.umd.js',
+      filename: "butter.umd.js",
       globalObject: "this",
       library: {
-        name: 'Butter',
-        type: 'umd',
+        name: "Butter",
+        type: "umd",
       },
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, "dist"),
     },
-    ...commonConfig
   },
   // ES Module Build
   {
-    entry: './lib/butter.js',
-    mode: "production",
+    ...productionConfig,
+    entry: "./lib/butter.js",
     output: {
-      filename: 'butter.esm.js',
+      filename: "butter.esm.js",
       library: {
-        type: 'module'
+        type: "module",
       },
-      path: path.resolve(__dirname, 'dist')
+      path: path.resolve(__dirname, "dist"),
     },
     experiments: {
       outputModule: true,
     },
-    ...commonConfig
-  }
+  },
+  // UMD Build - Development
+  {
+    ...developmentConfig,
+    entry: "./lib/butter.js",
+    output: {
+      filename: "butter.umd.dev.js",
+      globalObject: "this",
+      library: {
+        name: "Butter",
+        type: "umd",
+      },
+      path: path.resolve(__dirname, "dist"),
+    },
+  },
+  // ES Module Build - Development
+  {
+    ...developmentConfig,
+    entry: "./lib/butter.js",
+    output: {
+      filename: "butter.esm.dev.js",
+      library: {
+        type: "module",
+      },
+      path: path.resolve(__dirname, "dist"),
+    },
+    experiments: {
+      outputModule: true,
+    },
+  },
 ];

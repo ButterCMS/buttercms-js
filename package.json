@@ -13,9 +13,9 @@
     "node": ">=18.17.1"
   },
   "scripts": {
-    "build": "webpack",
+    "build": "webpack --env production",
+    "build-dev": "webpack --env development",
     "run-dev": "cd tests && python3 -m http.server",
-    "build-dev": "webpack && uglifyjs ./dist/butter.js -c -m -o ./tests/lib/butter.min.js",
     "test": "npm run build && npm run test:all",
     "test:all": "npm run jest",
     "test:watch": "npm run jest --watch",
