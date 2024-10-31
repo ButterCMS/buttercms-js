@@ -13,8 +13,8 @@
     "node": ">=18.17.1"
   },
   "scripts": {
-    "build": "webpack --env production",
-    "build-dev": "webpack --env development",
+    "build": "webpack",
+    "build-dev": "webpack --config webpack.dev.js",
     "run-dev": "cd tests && python3 -m http.server",
     "test": "npm run build && npm run test:all",
     "test:all": "npm run jest",
