@@ -355,6 +355,7 @@ export namespace Butter {
   interface PageRetrieveParams {
     preview?: 0 | 1;
     levels?: number;
+    locale?: string;
   }
 
   type PageListParams<PageModel extends object = object> =
@@ -364,6 +365,7 @@ export namespace Butter {
       order?: `${"-" | ""}${"published" | "updated"}`;
       page?: number;
       page_size?: number;
+      locale?: string;
     };
 
   interface PageSearchParams<PageType extends string = string> {
@@ -473,6 +475,7 @@ export namespace Butter {
       page?: number;
       page_size?: number;
       levels?: number;
+      locale?: string;
     };
 
   interface ContentResponse<ContentModels extends object = object> {
