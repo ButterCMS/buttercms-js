@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://github.com/ButterCMS/buttercms-js/compare/v2.1.4...v2.2.0) (2024-11-11)
+
+
+### Features
+
+* update builds to include dev builds ([3488632](https://github.com/ButterCMS/buttercms-js/commit/3488632d4059ff718937f0ec881452a8e3fb1f04))
+
+
+### Bug Fixes
+
+* split production builds ([1205812](https://github.com/ButterCMS/buttercms-js/commit/1205812850be6323d1d1f1e7d83c6704e200236c))
+
 ## [2.1.4](https://github.com/ButterCMS/buttercms-js/compare/v2.1.3...v2.1.4) (2024-09-04)
 
 
