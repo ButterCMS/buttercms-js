@@ -61,6 +61,13 @@ export namespace Butter {
     count: number;
   }
 
+  interface Methods {
+    /**
+     * Cancels the ongoing fetch request by aborting the associated AbortController
+     */
+    cancelRequest(): void;
+  }
+
   interface Response<Data extends object | string = any> {
     data?: Data;
     status?: number;
@@ -78,12 +85,14 @@ export namespace Butter {
   }
 
   interface PostListParams<AuthorSlug extends string = string> {
-    preview?: 1 | 0;
-    exclude_body?: boolean;
-    page?: number;
-    page_size?: number;
     author_slug?: AuthorSlug;
     category_slug?: string;
+    exclude_body?: boolean;
+    limit?: number;
+    offset?: number;
+    page?: number;
+    page_size?: number;
+    preview?: 1 | 0;
     tag_slug?: string;
   }
 
@@ -96,6 +105,16 @@ export namespace Butter {
     AuthorSlug extends string = string,
     PostSlug extends string = string
   > {
+    author: Omit<Author<AuthorSlug>, "recent_posts">;
+    body?: string;
+    categories: Category[];
+    created: string;
+    featured_image: string | null;
+    featured_image_alt: string;
+    meta_description: string;
+    published: string;
+    seo_title: string;
+    slug: PostSlug;
     status: "published" | "draft" | "scheduled";
     created: Date;
     updated: Date;
@@ -104,21 +123,22 @@ export namespace Butter {
     title: string;
     slug: PostSlug;
     summary: string;
-    seo_title: string;
-    meta_description: string;
-    featured_image: string;
-    featured_image_alt: string;
-    url: string;
-    author: Omit<Author<AuthorSlug>, "recent_posts">;
     tags: Tag[];
-    categories: Category[];
-    body?: string;
+    title: string;
+    updated: string | null;
+    url: string;
+  }
+
+  interface PostMeta  {
+    next_post: object | null;
+    previous_post: object | null;
   }
 
   interface PostRetrieveResponse<
     AuthorSlug extends string = string,
     PostSlug extends string = string
   > {
+    meta: PostMeta;
     data: Post<AuthorSlug, PostSlug>;
   }
 
@@ -135,7 +155,7 @@ export namespace Butter {
     data: Post[];
   }
 
-  interface PostMethods {
+  interface PostMethods extends Methods {
     /**
      * Retrieve a post
      * @param slug The post's slug
@@ -196,7 +216,7 @@ export namespace Butter {
     data: Category[];
   }
 
-  interface CategoryMethods {
+  interface CategoryMethods extends Methods {
     /**
      * Retrieve a category
      * @param slug The category's slug
@@ -243,7 +263,7 @@ export namespace Butter {
     data: Tag[];
   }
 
-  interface TagMethods {
+  interface TagMethods extends Methods {
     /**
      * Retrieve a tag
      * @param slug The tag's slug
@@ -300,7 +320,7 @@ export namespace Butter {
     data: Author[];
   }
 
-  interface AuthorMethods {
+  interface AuthorMethods extends Methods {
     /**
      * Retrieve an author
      * @param slug The author's slug
@@ -333,7 +353,7 @@ export namespace Butter {
     tag_slug?: string;
   }
 
-  interface FeedMethods {
+  interface FeedMethods extends Methods {
     /**
      * Get a feed
      * @param feedType The type of feed
@@ -354,25 +374,30 @@ export namespace Butter {
   //////////
 
   interface PageRetrieveParams {
-    preview?: 0 | 1;
     levels?: number;
+    locale?: string;
+    preview?: 0 | 1;
   }
 
   type PageListParams<PageModel extends object = object> =
     WithFieldsPrefix<PageModel> & {
-      preview?: 0 | 1;
       levels?: number;
-      order?: `${"-" | ""}${"published" | "updated"}`;
+      limit?: number;
+      locale?: string;
+      offset?: number;
       page?: number;
       page_size?: number;
+      preview?: 0 | 1;
     };
 
   interface PageSearchParams<PageType extends string = string> {
-    page_type?: PageType;
-    locale?: string;
     levels?: number;
+    limit?: number;
+    locale?: string;
+    offset?: number;
     page?: number;
     page_size?: number;
+    page_type?: PageType;
   }
 
   interface Page<
@@ -380,7 +405,10 @@ export namespace Butter {
     PageType extends string = string,
     PageSlug extends string = string
   > {
+    fields: PageModel;
+    name: string;
     page_type: PageType;
+    published: string;
     slug: PageSlug;
     name: string;
     published: Date;
@@ -414,7 +442,7 @@ export namespace Butter {
     data: Page<PageModel, PageType>[];
   }
 
-  interface PageMethods {
+  interface PageMethods extends Methods {
     /**
      * Retrieve a single page
      * @param page_type The page type
@@ -471,11 +499,12 @@ export namespace Butter {
 
   type ContentParams<ContentModel extends object = object> =
     WithFieldsPrefix<ContentModel> & {
-      test?: 0 | 1;
+      levels?: number;
+      locale?: string;
       order?: keyof OrderParam<ContentModel>;
       page?: number;
       page_size?: number;
-      levels?: number;
+      preview?: 0 | 1;
     };
 
   interface ContentResponse<ContentModels extends object = object> {
@@ -483,7 +512,7 @@ export namespace Butter {
     data: ContentArrays<ContentModels>;
   }
 
-  interface ContentMethods {
+  interface ContentMethods extends Methods {
     /**
      * Retrieve content
      * @param keys An array of the keys of the content to retrieve
@@ -503,26 +532,36 @@ export namespace Butter {
 }
 
 export class ButterStatic {
-  post: Butter.PostMethods;
-  category: Butter.CategoryMethods;
-  tag: Butter.TagMethods;
   author: Butter.AuthorMethods;
+  category: Butter.CategoryMethods;
+  content: Butter.ContentMethods;
   feed: Butter.FeedMethods;
   page: Butter.PageMethods;
-  content: Butter.ContentMethods;
+  post: Butter.PostMethods;
+  tag: Butter.TagMethods;
   constructor(
     apiToken: string,
-    testMode?: boolean,
-    timeout?: number,
-    axiosHook?: (axios: AxiosInstance) => unknown
+    options: {
+      cache?: string
+      onError?: ((errors: any[], params?: object) => void) | null
+      onRequest?: ((apiEndpoint: string, params?: object) => void) | null
+      onResponse?: ((response: Response, params?: object) => void) | null
+      testMode?: boolean
+      timeout?: number
+    }
   );
 }
 
 export const Butter: (
   apiToken: string,
-  testMode?: boolean,
-  timeout?: number,
-  axiosHook?: (axios: AxiosInstance) => unknown
+  options?: {
+    cache?: string
+    onError?: ((errors: any[], params?: object) => void) | null
+    onRequest?: ((apiEndpoint: string, params?: object) => void) | null
+    onResponse?: ((response: Response, params?: object) => void) | null
+    testMode?: boolean
+    timeout?: number
+  }
 ) => ButterStatic;
 
 export default Butter;
