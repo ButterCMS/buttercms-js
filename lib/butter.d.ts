@@ -382,6 +382,7 @@ export namespace Butter {
       offset?: number;
       page?: number;
       page_size?: number;
+      locale?: string;
       preview?: 0 | 1;
     };
 
@@ -495,6 +496,8 @@ export namespace Butter {
       order?: keyof OrderParam<ContentModel>;
       page?: number;
       page_size?: number;
+      levels?: number;
+      locale?: string;
       preview?: 0 | 1;
     };
 
