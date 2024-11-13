@@ -20,7 +20,7 @@ Butter can also be included directly in HTML:
 
 <!-- {x-release-please-start-version} -->
 ```html
-<script src="https://cdn.jsdelivr.net/npm/buttercms@2.1.4/dist/butter.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/buttercms@2.3.0/dist/butter.min.js"></script>
 ```
 <!-- {x-release-please-end} -->
 
@@ -38,14 +38,14 @@ Using ES6 or Typescript:
 
 ```js
 import Butter from "buttercms";
-const butter = Butter("api_token_567abe");
+const butter = Butter("your_api_token");
 ```
 
 Using CDN:
 
 ```html
 <script>
-  const butter = Butter("api_token_567abe");
+  const butter = Butter("your_api_token");
 </script>
 ```
 

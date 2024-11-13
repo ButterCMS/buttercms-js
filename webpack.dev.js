@@ -1,38 +1,23 @@
 import * as url from "url";
 import path from "path";
-import webpack from "webpack";
-import TerserPlugin from "terser-webpack-plugin";
 
 const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
 
-const productionConfig = {
-  mode: "production",
+const developmentConfig = {
+  mode: "development",
+  devtool: "inline-source-map",
   optimization: {
-    minimize: true,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          compress: true,
-          mangle: true,
-        },
-        extractComments: false,
-      }),
-    ],
+    minimize: false, // No minification in development
   },
-  plugins: [
-    new webpack.optimize.LimitChunkCountPlugin({
-      maxChunks: 1,
-    }),
-  ],
 };
 
 export default [
-  // UMD Build
+  // UMD Build - Development
   {
-    ...productionConfig,
+    ...developmentConfig,
     entry: "./lib/butter.js",
     output: {
-      filename: "butter.umd.js",
+      filename: "butter.umd.dev.js",
       globalObject: "this",
       library: {
         name: "Butter",
@@ -41,12 +26,12 @@ export default [
       path: path.resolve(__dirname, "dist"),
     },
   },
-  // ES Module Build
+  // ES Module Build - Development
   {
-    ...productionConfig,
+    ...developmentConfig,
     entry: "./lib/butter.js",
     output: {
-      filename: "butter.esm.js",
+      filename: "butter.esm.dev.js",
       library: {
         type: "module",
       },

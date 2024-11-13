@@ -1,6 +1,6 @@
 {
   "name": "buttercms",
-  "version": "2.1.4",
+  "version": "2.3.0",
   "description": "ButterCMS API Client",
   "keywords": [
     "buttercms",
@@ -13,9 +13,9 @@
     "node": ">=18.17.1"
   },
   "scripts": {
-    "build": "webpack && uglifyjs ./dist/butter.js -c -m -o ./dist/butter.min.js",
+    "build": "webpack",
+    "build-dev": "webpack --config webpack.dev.js",
     "run-dev": "cd tests && python3 -m http.server",
-    "build-dev": "webpack && uglifyjs ./dist/butter.js -c -m -o ./tests/lib/butter.min.js",
     "test": "npm run build && npm run test:all",
     "test:all": "npm run jest",
     "test:watch": "npm run jest --watch",
@@ -27,15 +27,26 @@
     "type": "git",
     "url": "git://github.com/buttercms/buttercms-js.git"
   },
-  "main": "dist/butter.min.js",
+  "main": "dist/butter.umd.js",
+  "module": "dist/butter.esm.js",
   "types": "lib/butter.d.ts",
   "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/butter.esm.js",
+      "require": "./dist/butter.umd.js"
+    }
+  },
+  "files": [
+    "dist",
+    "lib/butter.d.ts"
+  ],
   "license": "MIT",
   "devDependencies": {
     "jest": "^29.7.0",
-    "msw": "^2.0.11",
-    "uglify-js": "^3.17.4",
-    "webpack": "^5.89.0",
+    "msw": "^2.6.0",
+    "terser-webpack-plugin": "^5.3.10",
+    "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4"
   }
 }
