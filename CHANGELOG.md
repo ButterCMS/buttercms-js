@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0](https://github.com/ButterCMS/buttercms-js/compare/v2.2.0...v2.3.0) (2024-11-13)
+
+
+### Features
+
+* add V2 Typings to JS SDK ([41e2fe8](https://github.com/ButterCMS/buttercms-js/commit/41e2fe87ff4987bf5acf56997a46df8852e75bfb))
+
 ## [2.2.0](https://github.com/ButterCMS/buttercms-js/compare/v2.1.4...v2.2.0) (2024-11-11)
 
 
