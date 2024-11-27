@@ -34,7 +34,8 @@
   "exports": {
     ".": {
       "import": "./dist/butter.esm.js",
-      "require": "./dist/butter.umd.js"
+      "require": "./dist/butter.umd.js",
+      "types": "./lib/butter.d.ts"
     }
   },
   "files": [
