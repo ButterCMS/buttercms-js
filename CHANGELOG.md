@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.1](https://github.com/ButterCMS/buttercms-js/compare/v2.3.0...v2.3.1) (2024-12-06)
+
+
+### Bug Fixes
+
+* Exports types for resolution in ESM Modules ([7f3dbaa](https://github.com/ButterCMS/buttercms-js/commit/7f3dbaa75774715bbfd20ce48b53d55d027cb093))
+
 ## [2.3.0](https://github.com/ButterCMS/buttercms-js/compare/v2.2.0...v2.3.0) (2024-11-13)
 
 
