@@ -10,7 +10,7 @@
     "headless cms"
   ],
   "engines": {
-    "node": ">=18.17.1"
+    "node": ">=20.18.0"
   },
   "scripts": {
     "build": "webpack",
