@@ -22,7 +22,7 @@ Butter can also be included directly in HTML:
 
 <!-- {x-release-please-start-version} -->
 ```html
-<script src="https://cdn.jsdelivr.net/npm/buttercms@2.3.1/dist/butter.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/buttercms@3.0.0/dist/butter.min.js"></script>
 ```
 <!-- {x-release-please-end} -->
 

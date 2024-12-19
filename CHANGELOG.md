@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0](https://github.com/ButterCMS/buttercms-js/compare/v2.3.1...v3.0.0) (2024-12-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* upgrade to node 20
+
+### Features
+
+* upgrade to node 20 ([54bcb62](https://github.com/ButterCMS/buttercms-js/commit/54bcb626c3d571aec689d743479ac3e68a266d66))
+
 ## [2.3.1](https://github.com/ButterCMS/buttercms-js/compare/v2.3.0...v2.3.1) (2024-12-06)
 
 
