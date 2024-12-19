@@ -6,11 +6,13 @@
 
 For a comprehensive list of examples, check out the [API documentation](https://buttercms.com/docs/api/).
 
-ButterCMS-JS version 2 will be supported until January 2025. Version 3 is slated for launch in November 2024 when Node v20 is moved to maintenance mode.
+ButterCMS-JS version 2 will be supported until May 2025, when Node v18 sunsets. 
+ButterCMS-JS version 3 is our current version and will be supported until May 2026 when Node v20 sunsets
+ButterCMS-JS version 4 slated for launch in December 2025 when Node v22 is moved to maintenance mode.
 
 ## Installation
 
-Requires Node.js version 18 or greater.
+Requires Node.js version 20 or greater.
 
 ```bash
 npm install buttercms --save
