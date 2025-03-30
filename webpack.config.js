@@ -32,7 +32,7 @@ export default [
     ...productionConfig,
     entry: "./lib/butter.js",
     output: {
-      filename: "butter.umd.js",
+      filename: "butter.umd.cjs",
       globalObject: "this",
       library: {
         name: "Butter",

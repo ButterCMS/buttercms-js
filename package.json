@@ -27,14 +27,15 @@
     "type": "git",
     "url": "git://github.com/buttercms/buttercms-js.git"
   },
-  "main": "dist/butter.umd.js",
+  "main": "dist/butter.umd.cjs",
   "module": "dist/butter.esm.js",
   "types": "lib/butter.d.ts",
   "type": "module",
   "exports": {
     ".": {
       "import": "./dist/butter.esm.js",
-      "require": "./dist/butter.umd.js",
+      "require": "./dist/butter.umd.cjs",
+      "esmodules": "./dist/butter.esm.js",
       "types": "./lib/butter.d.ts"
     }
   },
