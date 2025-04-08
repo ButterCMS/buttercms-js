@@ -2,6 +2,7 @@
   "name": "buttercms",
   "version": "3.0.0",
   "description": "ButterCMS API Client",
+  "type": "module",
   "keywords": [
     "buttercms",
     "butter",
@@ -10,7 +11,7 @@
     "headless cms"
   ],
   "engines": {
-    "node": ">=20.18.0"
+    "node": ">=18.0.0"
   },
   "scripts": {
     "build": "webpack",
@@ -19,7 +20,10 @@
     "test": "npm run build && npm run test:all",
     "test:all": "npm run jest",
     "test:watch": "npm run jest --watch",
-    "jest": "node --experimental-vm-modules node_modules/.bin/jest"
+    "jest": "node --experimental-vm-modules node_modules/.bin/jest",
+    "test:esm": "node --experimental-vm-modules tests/esm-test.mjs",
+    "test:cjs": "node tests/cjs-test.cjs",
+    "test:modules": "npm run test:esm && npm run test:cjs"
   },
   "homepage": "https://github.com/buttercms/buttercms-js",
   "author": "ButterCMS <support@buttercms.com>",
@@ -27,15 +31,13 @@
     "type": "git",
     "url": "git://github.com/buttercms/buttercms-js.git"
   },
-  "main": "dist/butter.umd.cjs",
-  "module": "dist/butter.esm.js",
-  "types": "lib/butter.d.ts",
-  "type": "module",
+  "main": "./dist/butter.umd.cjs",
+  "module": "./dist/butter.esm.js",
+  "types": "./lib/butter.d.ts",
   "exports": {
     ".": {
       "import": "./dist/butter.esm.js",
       "require": "./dist/butter.umd.cjs",
-      "esmodules": "./dist/butter.esm.js",
       "types": "./lib/butter.d.ts"
     }
   },
@@ -45,14 +47,25 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "@babel/core": "^7.23.9",
+    "@babel/preset-env": "^7.23.9",
+    "@babel/preset-typescript": "^7.23.3",
+    "@rollup/plugin-babel": "^6.0.4",
+    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^11.1.6",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.11.19",
+    "babel-jest": "^29.7.0",
     "jest": "^29.7.0",
-    "msw": "^2.6.0",
-    "terser-webpack-plugin": "^5.3.10",
-    "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4"
+    "rollup": "^4.9.6",
+    "rollup-plugin-dts": "^6.1.0",
+    "ts-jest": "^29.1.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@types/axios": "^0.14.4",
-    "buttercms": "^3.0.0"
+    "@types/axios": "^0.14.4"
   }
 }

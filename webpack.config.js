@@ -1,9 +1,6 @@
-import * as url from "url";
-import path from "path";
-import webpack from "webpack";
-import TerserPlugin from "terser-webpack-plugin";
-
-const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+const path = require('path');
+const webpack = require('webpack');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const productionConfig = {
   mode: "production",
@@ -24,9 +21,12 @@ const productionConfig = {
       maxChunks: 1,
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.mjs', '.cjs', '.json'],
+  },
 };
 
-export default [
+module.exports = [
   // UMD Build
   {
     ...productionConfig,
@@ -37,8 +37,30 @@ export default [
       library: {
         name: "Butter",
         type: "umd",
+        export: "default",
       },
       path: path.resolve(__dirname, "dist"),
+    },
+    module: {
+      rules: [
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env', {
+                  targets: {
+                    node: "18"
+                  },
+                  modules: 'commonjs'
+                }]
+              ]
+            },
+          },
+        },
+      ],
     },
   },
   // ES Module Build
@@ -51,9 +73,33 @@ export default [
         type: "module",
       },
       path: path.resolve(__dirname, "dist"),
+      environment: {
+        module: true,
+      },
     },
     experiments: {
       outputModule: true,
+    },
+    module: {
+      rules: [
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                ['@babel/preset-env', {
+                  targets: {
+                    node: "18"
+                  },
+                  modules: false
+                }]
+              ]
+            },
+          },
+        },
+      ],
     },
   },
 ];
