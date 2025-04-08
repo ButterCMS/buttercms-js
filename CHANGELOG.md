@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.1](https://github.com/ButterCMS/buttercms-js/compare/v3.0.0...v3.0.1) (2025-04-08)
+
+
+### Bug Fixes
+
+* 3154 remove importing unused AxiosInstance, modify config ([10439bb](https://github.com/ButterCMS/buttercms-js/commit/10439bb9933da2cbd941eda0ffd5561da2f76d68))
+
 ## [3.0.0](https://github.com/ButterCMS/buttercms-js/compare/v2.3.1...v3.0.0) (2024-12-19)
 
 
