@@ -17,7 +17,7 @@ export default [
     ...developmentConfig,
     entry: "./lib/butter.js",
     output: {
-      filename: "butter.umd.dev.js",
+      filename: "butter.umd.dev.cjs",
       globalObject: "this",
       library: {
         name: "Butter",

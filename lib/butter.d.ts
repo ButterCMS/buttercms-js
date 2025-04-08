@@ -1,5 +1,3 @@
-import { AxiosInstance } from "axios";
-
 ////////////////////////////
 // Internal utility types //
 ////////////////////////////
@@ -72,8 +70,8 @@ export namespace Butter {
     data?: Data;
     status?: number;
     statusText?: string;
-    headers?: Record<string, any>;
-    config?: Record<string, any>;
+    headers?: Headers;
+    config?: RequestInit;
   }
 
   //////////
