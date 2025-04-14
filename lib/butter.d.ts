@@ -367,6 +367,7 @@ export namespace Butter {
   //////////
 
   interface PageRetrieveParams {
+    alt_media_text?: 0 | 1;
     levels?: number;
     locale?: string;
     preview?: 0 | 1;
@@ -374,10 +375,12 @@ export namespace Butter {
 
   type PageListParams<PageModel extends object = object> =
     WithFieldsPrefix<PageModel> & {
+      alt_media_text?: 0 | 1;
       levels?: number;
       limit?: number;
       locale?: string;
       offset?: number;
+      order?: string;
       page?: number;
       page_size?: number;
       preview?: 0 | 1;
