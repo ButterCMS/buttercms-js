@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.2](https://github.com/ButterCMS/buttercms-js/compare/v3.0.1...v3.0.2) (2025-04-16)
+
+
+### Bug Fixes
+
+* add missing page params in typings ([d84eed0](https://github.com/ButterCMS/buttercms-js/commit/d84eed0164c22e0de3f89827fc88d8698590ba8f))
+
 ## [3.0.1](https://github.com/ButterCMS/buttercms-js/compare/v3.0.0...v3.0.1) (2025-04-08)
 
 
