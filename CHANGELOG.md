@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.0.3](https://github.com/ButterCMS/buttercms-js/compare/v3.0.2...v3.0.3) (2025-09-04)
+
+
+### Bug Fixes
+
+* [BCMS-926] timeout handling for wider compatibility ([#127](https://github.com/ButterCMS/buttercms-js/issues/127)) ([09465b2](https://github.com/ButterCMS/buttercms-js/commit/09465b2dcb4c158d758fd6ff8f47ebc58f134626))
+
+
+### Reverts
+
+* 124 ([#126](https://github.com/ButterCMS/buttercms-js/issues/126)) ([212d2da](https://github.com/ButterCMS/buttercms-js/commit/212d2da265755c4d84a5cb93d4b9fc02e96f6ed5))
+
 ## [3.0.2](https://github.com/ButterCMS/buttercms-js/compare/v3.0.1...v3.0.2) (2025-04-16)
 
 
