@@ -6,7 +6,7 @@ on:
       - master
 
 permissions:
-  id-token: write # required for trusted publishers
+  id-token: write # required for trusted publishing
   contents: read
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
 
       - name: Install npm
-        run: npm install -g npm@">=11.5.1" # trusted publishers requires 11.5.1 or later
+        run: npm install -g npm@">=11.5.1" # trusted publishing requires 11.5.1 or later
 
       - name: Install dependencies
         run: npm install
