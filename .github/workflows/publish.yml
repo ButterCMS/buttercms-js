@@ -2,8 +2,8 @@ name: Publish to npm
 
 on:
   push:
-    branches:
-      - master
+#    branches:
+#      - master
 
 permissions:
   id-token: write # required for trusted publishers
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   publish-npm:
-    if: contains(github.event.head_commit.message, 'chore(release)') 
+    # if: contains(github.event.head_commit.message, 'chore(release)') 
     runs-on: ubuntu-22.04
 
     steps:
@@ -34,4 +34,4 @@ jobs:
         run: npm run build
 
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm publish --dry-run --access public

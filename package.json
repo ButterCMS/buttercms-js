@@ -25,7 +25,7 @@
   "author": "ButterCMS <support@buttercms.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/buttercms/buttercms-js.git"
+    "url": "https://github.com/ButterCMS/buttercms-js.git"
   },
   "main": "dist/butter.umd.cjs",
   "module": "dist/butter.esm.js",
