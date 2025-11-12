@@ -5,6 +5,10 @@ on:
     branches:
       - master
 
+permissions:
+  id-token: write # required for trusted publishers
+  contents: read
+
 jobs:
   publish-npm:
     if: contains(github.event.head_commit.message, 'chore(release)') 
@@ -12,13 +16,16 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3.5.3
-      
+        uses: actions/checkout@v4
+
       - name: Set up Node
-        uses: actions/setup-node@v3.7.0
+        uses: actions/setup-node@v4
         with:
-          node-version: 18.17.1
+          node-version: '20'
           registry-url: https://registry.npmjs.org/
+
+      - name: Install npm
+        run: npm install -g npm@">=11.5.1" # trusted publishers requires 11.5.1 or later
 
       - name: Install dependencies
         run: npm install
@@ -28,5 +35,3 @@ jobs:
 
       - name: Publish to npm
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
