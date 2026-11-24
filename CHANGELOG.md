@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.0.4](https://github.com/ButterCMS/buttercms-js/compare/v3.0.3...v3.0.4) (2026-11-24)
+
+
+### Bug Fixes
+
+* [BCMS-2060] stop triggering CORS preflight on browser GET requests ([#131](https://github.com/ButterCMS/buttercms-js/issues/131)) ([7ef0ad9](https://github.com/ButterCMS/buttercms-js/commit/7ef0ad912bb785b18c7b924b508ef672066af601))
+
 ## [3.0.3](https://github.com/ButterCMS/buttercms-js/compare/v3.0.2...v3.0.3) (2025-09-04)
 
 
